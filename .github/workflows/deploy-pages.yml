@@ -30,7 +30,11 @@ jobs:
           node-version: 20
           cache: npm
 
-      - name: Setup GitHub Pages
+      - name: Configure GitHub Pages base path
+        run: |
+          echo "NEXT_PUBLIC_BASE_PATH=/kazi-hamidur-portfolio" >> $GITHUB_ENV
+
+      - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
 
       - name: Install dependencies
