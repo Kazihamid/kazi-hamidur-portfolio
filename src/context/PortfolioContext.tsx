@@ -22,7 +22,15 @@ export function PortfolioProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     try {
       const stored = localStorage.getItem(STORAGE_KEY);
-      if (stored) setData(JSON.parse(stored));
+      if (stored) {
+        const parsed = JSON.parse(stored) as PortfolioData;
+        // Preserve existing drafts, but migrate the original GitHub avatar to
+        // the new local professional portrait shipped with the portfolio.
+        if (parsed.profile?.image === "https://github.com/Kazihamid.png?size=480") {
+          parsed.profile.image = defaults.profile.image;
+        }
+        setData(parsed);
+      }
     } catch {
       // Keep defaults if local draft is invalid.
     } finally {

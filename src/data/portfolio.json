@@ -1,8 +1,8 @@
 {
   "profile": {
     "name": "Kazi Hamidur Rahman",
-    "title": "Technical Lead \u2013 Software Quality Assurance",
-    "eyebrow": "TECHNICAL LEAD \u00b7 SOFTWARE QUALITY ASSURANCE",
+    "title": "Technical Lead – Software Quality Assurance",
+    "eyebrow": "TECHNICAL LEAD · SOFTWARE QUALITY ASSURANCE",
     "heroTitle": "Engineering Quality for a Better Tomorrow",
     "heroDescription": "Software Quality Assurance leader with 20+ years of experience across QA leadership, enterprise systems, test automation, API validation and performance engineering.",
     "summary": "I help teams build reliable software through practical QA strategy, strong collaboration, thoughtful automation and continuous quality improvement.",
@@ -28,12 +28,12 @@
     {
       "label": "ERP",
       "title": "Enterprise Quality",
-      "detail": "ERP \u00b7 HRMS \u00b7 Recruitment"
+      "detail": "ERP · HRMS · Recruitment"
     },
     {
       "label": "AUTO",
       "title": "Automation",
-      "detail": "Playwright \u00b7 Selenium"
+      "detail": "Playwright · Selenium"
     }
   ],
   "skills": [
@@ -88,7 +88,7 @@
   ],
   "experience": [
     {
-      "role": "Technical Lead \u2013 Software Quality Assurance",
+      "role": "Technical Lead – Software Quality Assurance",
       "company": "BRAC IT Services Ltd.",
       "start": "July 2023",
       "end": "Present",
@@ -303,9 +303,9 @@
   },
   "certifications": [
     {
-      "name": "ISTQB Certified Tester \u2013 Foundation Level",
+      "name": "ISTQB Certified Tester – Foundation Level",
       "issuer": "Daffodil International University & Bangladesh Software Testing Board",
-      "year": "2016\u20132017"
+      "year": "2016–2017"
     },
     {
       "name": "Agile Management Project with Scrum",
@@ -383,8 +383,8 @@
     }
   ],
   "seo": {
-    "title": "Kazi Hamidur Rahman | Technical Lead \u2013 Software Quality Assurance",
-    "description": "Professional portfolio of Kazi Hamidur Rahman, Technical Lead \u2013 Software Quality Assurance, focused on QA leadership, automation, API testing, performance engineering and enterprise software quality."
+    "title": "Kazi Hamidur Rahman | Technical Lead – Software Quality Assurance",
+    "description": "Professional portfolio of Kazi Hamidur Rahman, Technical Lead – Software Quality Assurance, focused on QA leadership, automation, API testing, performance engineering and enterprise software quality."
   },
   "appearance": {
     "theme": "dark",
