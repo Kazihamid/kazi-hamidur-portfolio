@@ -1,0 +1,394 @@
+{
+  "profile": {
+    "name": "Kazi Hamidur Rahman",
+    "title": "Technical Lead \u2013 Software Quality Assurance",
+    "eyebrow": "TECHNICAL LEAD \u00b7 SOFTWARE QUALITY ASSURANCE",
+    "heroTitle": "Engineering Quality for a Better Tomorrow",
+    "heroDescription": "Software Quality Assurance leader with 20+ years of experience across QA leadership, enterprise systems, test automation, API validation and performance engineering.",
+    "summary": "I help teams build reliable software through practical QA strategy, strong collaboration, thoughtful automation and continuous quality improvement.",
+    "location": "Dhaka, Bangladesh",
+    "email": "kazihamid.rahman@gmail.com",
+    "phone": "+8801787688621",
+    "image": "https://github.com/Kazihamid.png?size=480",
+    "github": "https://github.com/Kazihamid",
+    "linkedin": "https://www.linkedin.com/in/kazi-hamidur-rahman-56105525/",
+    "cv": "/documents/Kazi-Hamidur-Rahman-CV.docx"
+  },
+  "highlights": [
+    {
+      "label": "20+",
+      "title": "Years Experience",
+      "detail": "Software engineering & QA"
+    },
+    {
+      "label": "QA",
+      "title": "Leadership",
+      "detail": "Strategy, planning & mentoring"
+    },
+    {
+      "label": "ERP",
+      "title": "Enterprise Quality",
+      "detail": "ERP \u00b7 HRMS \u00b7 Recruitment"
+    },
+    {
+      "label": "AUTO",
+      "title": "Automation",
+      "detail": "Playwright \u00b7 Selenium"
+    }
+  ],
+  "skills": [
+    {
+      "group": "QA Leadership",
+      "items": [
+        "QA Strategy",
+        "Test Planning",
+        "Estimation",
+        "Risk Analysis",
+        "Team Mentoring",
+        "Release Readiness"
+      ]
+    },
+    {
+      "group": "Automation",
+      "items": [
+        "Playwright + Python",
+        "Selenium + Java",
+        "Regression Automation",
+        "Framework Design"
+      ]
+    },
+    {
+      "group": "API & Backend",
+      "items": [
+        "Postman",
+        "REST API Validation",
+        "Python API Automation"
+      ]
+    },
+    {
+      "group": "Performance",
+      "items": [
+        "K6",
+        "Apache JMeter",
+        "BlazeMeter",
+        "Load & Stress Testing"
+      ]
+    },
+    {
+      "group": "Database & Delivery",
+      "items": [
+        "SQL",
+        "PostgreSQL",
+        "Jira",
+        "Agile",
+        "Scrum",
+        "SDLC"
+      ]
+    }
+  ],
+  "experience": [
+    {
+      "role": "Technical Lead \u2013 Software Quality Assurance",
+      "company": "BRAC IT Services Ltd.",
+      "start": "July 2023",
+      "end": "Present",
+      "summary": "Leads QA planning, strategy, execution, team coordination and process improvement across enterprise applications.",
+      "focus": [
+        "QA Leadership",
+        "Automation",
+        "Performance",
+        "Release Readiness"
+      ]
+    },
+    {
+      "role": "Lead SQA Engineer",
+      "company": "BRAC IT Services Ltd.",
+      "start": "July 2017",
+      "end": "May 2023",
+      "summary": "Led testing and QA documentation across multiple projects in Agile/Scrum environments.",
+      "focus": [
+        "Enterprise QA",
+        "Agile",
+        "Test Planning"
+      ]
+    },
+    {
+      "role": "Associate Manager, SQA Engineer",
+      "company": "BRAC IT Services Ltd.",
+      "start": "January 2015",
+      "end": "June 2017",
+      "summary": "Managed QA planning, resources, testing, defect management and mentoring for enterprise products.",
+      "focus": [
+        "Management",
+        "ERP",
+        "Automation"
+      ]
+    },
+    {
+      "role": "Sr. SQA Specialist",
+      "company": "20-20 Technologies Bangladesh Ltd.",
+      "start": "July 2013",
+      "end": "October 2014",
+      "summary": "Led QA scope, plans, resource estimates, testing and team communication.",
+      "focus": [
+        "Functional Testing",
+        "Selenium",
+        "JMeter"
+      ]
+    },
+    {
+      "role": "QA Specialist",
+      "company": "20-20 Technologies Bangladesh Ltd.",
+      "start": "March 2011",
+      "end": "June 2013",
+      "summary": "Performed functional, integration, regression, security and usability testing.",
+      "focus": [
+        "Testing",
+        "Documentation",
+        "Mentoring"
+      ]
+    },
+    {
+      "role": "SQA Engineer",
+      "company": "Recursion Technologies Limited",
+      "start": "January 2009",
+      "end": "February 2011",
+      "summary": "Performed requirements analysis, software testing, implementation and user training.",
+      "focus": [
+        "UAT",
+        "System Testing",
+        "Requirements"
+      ]
+    },
+    {
+      "role": "Software Programmer",
+      "company": "Spectrum Engineering Consortium Ltd.",
+      "start": "June 2006",
+      "end": "December 2008",
+      "summary": "Worked on requirements analysis, software development, testing, implementation and training.",
+      "focus": [
+        "Software Development",
+        "Testing",
+        "Implementation"
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "id": "erp-hrms",
+      "title": "ERP / HRMS Quality Assurance",
+      "category": "Enterprise Systems",
+      "description": "Quality assurance for enterprise HR and business processes, including functional, integration, regression and release validation.",
+      "tools": [
+        "ERP/HRMS",
+        "Functional Testing",
+        "Regression"
+      ],
+      "featured": true
+    },
+    {
+      "id": "erecruitment",
+      "title": "E-Recruitment Quality Assurance",
+      "category": "Enterprise Systems",
+      "description": "Testing recruitment and hiring workflows across web-based enterprise recruitment functionality.",
+      "tools": [
+        "Web Testing",
+        "API Validation",
+        "UAT"
+      ],
+      "featured": true
+    },
+    {
+      "id": "automation",
+      "title": "Test Automation Engineering",
+      "category": "Automation",
+      "description": "UI automation and regression coverage using Selenium-Java and Playwright-Python approaches.",
+      "tools": [
+        "Playwright",
+        "Python",
+        "Selenium",
+        "Java"
+      ],
+      "featured": true
+    },
+    {
+      "id": "performance",
+      "title": "Performance Engineering",
+      "category": "Performance",
+      "description": "Load, stress and performance validation for enterprise applications using modern performance tooling.",
+      "tools": [
+        "K6",
+        "JMeter",
+        "BlazeMeter"
+      ],
+      "featured": false
+    },
+    {
+      "id": "api",
+      "title": "API Testing & Validation",
+      "category": "API",
+      "description": "REST API testing and validation using Postman and Python-based automation approaches.",
+      "tools": [
+        "Postman",
+        "REST API",
+        "Python"
+      ],
+      "featured": false
+    },
+    {
+      "id": "procurement",
+      "title": "Procurement / e-Tender QA",
+      "category": "Enterprise Systems",
+      "description": "Quality validation of procurement and e-Tender workflows and associated business processes.",
+      "tools": [
+        "Functional Testing",
+        "Integration",
+        "UAT"
+      ],
+      "featured": false
+    }
+  ],
+  "leadership": {
+    "title": "Building Quality Teams for a Better Tomorrow",
+    "subtitle": "Quality leadership is about creating confidence, capability and ownership across the team.",
+    "philosophy": [
+      {
+        "title": "Quality Ownership",
+        "text": "Quality is shared ownership across the delivery team, not only the QA function."
+      },
+      {
+        "title": "Risk-Based Thinking",
+        "text": "Focus testing effort where failure would create the greatest business and user risk."
+      },
+      {
+        "title": "Shift-Left Quality",
+        "text": "Improve quality early through requirements review, collaboration and early validation."
+      },
+      {
+        "title": "Continuous Improvement",
+        "text": "Improve processes, tools, automation and team capability continuously."
+      }
+    ],
+    "process": [
+      "Requirement",
+      "Risk",
+      "Test Strategy",
+      "Automation",
+      "Validation",
+      "Release Confidence",
+      "Continuous Improvement"
+    ],
+    "leadAreas": [
+      "Strategy & Planning",
+      "Test Governance",
+      "Automation Direction",
+      "Release Readiness",
+      "Cross-Team Collaboration",
+      "Quality Reporting"
+    ],
+    "mentoring": [
+      "Coaching QA Engineers",
+      "Test Case / Defect Review",
+      "Automation Upskilling",
+      "Knowledge Sharing",
+      "Career Development",
+      "Creating a Quality Culture"
+    ],
+    "principles": [
+      "Testing starts from requirements, not from code.",
+      "Automation should reduce risk, not just execution time.",
+      "Good QA enables confident delivery.",
+      "People grow when they are trusted and given responsibility."
+    ]
+  },
+  "certifications": [
+    {
+      "name": "ISTQB Certified Tester \u2013 Foundation Level",
+      "issuer": "Daffodil International University & Bangladesh Software Testing Board",
+      "year": "2016\u20132017"
+    },
+    {
+      "name": "Agile Management Project with Scrum",
+      "issuer": "BRAC IT Services Ltd.",
+      "year": "2017"
+    },
+    {
+      "name": "Advanced Certificate for Management Professionals (ACMP 4.0)",
+      "issuer": "Institute of Business Administration, University of Dhaka",
+      "year": "2018"
+    },
+    {
+      "name": "Become an Ethical Hacker",
+      "issuer": "LinkedIn",
+      "year": "2021"
+    },
+    {
+      "name": "ISO: IT Service & Information Security Management System",
+      "issuer": "Professional Training",
+      "year": "2015"
+    },
+    {
+      "name": "Coaching Skills for Leaders and Managers",
+      "issuer": "LinkedIn",
+      "year": "2021"
+    }
+  ],
+  "education": [
+    {
+      "degree": "Master of Business Administration (MBA), Human Resource Management",
+      "school": "Independent University, Bangladesh",
+      "year": "2011"
+    },
+    {
+      "degree": "Bachelor of Science (B.Sc.), Computer Science",
+      "school": "Independent University, Bangladesh",
+      "year": "2006"
+    }
+  ],
+  "navigation": [
+    {
+      "label": "Home",
+      "href": "/",
+      "visible": true
+    },
+    {
+      "label": "About",
+      "href": "/about",
+      "visible": true
+    },
+    {
+      "label": "Experience",
+      "href": "/experience",
+      "visible": true
+    },
+    {
+      "label": "Projects",
+      "href": "/projects",
+      "visible": true
+    },
+    {
+      "label": "Leadership",
+      "href": "/leadership",
+      "visible": true
+    },
+    {
+      "label": "Certifications",
+      "href": "/certifications",
+      "visible": true
+    },
+    {
+      "label": "Contact",
+      "href": "/contact",
+      "visible": true
+    }
+  ],
+  "seo": {
+    "title": "Kazi Hamidur Rahman | Technical Lead \u2013 Software Quality Assurance",
+    "description": "Professional portfolio of Kazi Hamidur Rahman, Technical Lead \u2013 Software Quality Assurance, focused on QA leadership, automation, API testing, performance engineering and enterprise software quality."
+  },
+  "appearance": {
+    "theme": "dark",
+    "accent": "blue",
+    "animations": true
+  }
+}
