@@ -12,7 +12,10 @@ export default function About() {
     <section className="shell about-grid">
       <article className="bento-card profile-card">
         <img src={assetPath(data.profile.image)} alt={data.profile.name} />
-        <h2>{data.profile.name}</h2><p>{data.profile.title}</p><p>{data.profile.location}</p>
+        <h2>{data.profile.name}</h2>
+        <p>{data.profile.title}</p>
+        <p>{data.experience[0]?.company}</p>
+        <p>{data.profile.location}</p>
       </article>
       <article className="bento-card large"><h2>Professional Profile</h2><p>{data.profile.heroDescription}</p><p>My work spans software testing, SDLC, enterprise implementations, automation, performance engineering, documentation, stakeholder collaboration, mentoring and release readiness.</p></article>
     </section>

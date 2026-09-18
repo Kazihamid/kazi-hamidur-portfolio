@@ -42,6 +42,14 @@ export function PortfolioProvider({ children }: { children: React.ReactNode }) {
             item.detail = "Python-Playwright · Selenium-Java";
           }
         });
+        parsed.skills?.forEach((group) => {
+          if (group.group === "Automation") {
+            group.items = group.items.map((item) =>
+              item === "Playwright + Python" ? "Python + Playwright" : item
+            );
+          }
+        });
+
         const technicalLead = parsed.experience?.find(
           (item) => item.role === "Technical Lead – Software Quality Assurance"
         );

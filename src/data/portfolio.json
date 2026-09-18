@@ -51,7 +51,7 @@
     {
       "group": "Automation",
       "items": [
-        "Playwright + Python",
+        "Python + Playwright",
         "Selenium + Java",
         "Regression Automation",
         "Framework Design"
