@@ -8,5 +8,5 @@ const items = [
 ];
 export function SetupShell({ children }: {children: React.ReactNode}) {
   const path = usePathname();
-  return <div className="setup-layout"><aside className="setup-sidebar"><div className="setup-logo">KH. <span>Portfolio</span></div>{items.map(([label,href])=><Link key={href} href={href} className={path===href?"selected":""}>{label}</Link>)}<Link href="/" className="preview-link">↗ View Portfolio</Link></aside><main className="setup-main">{children}</main></div>;
+  return <div className="setup-layout"><aside className="setup-sidebar"><div className="setup-logo">Portfolio <span>| Kazi Hamidur Rahman</span></div>{items.map(([label,href])=><Link key={href} href={href} className={path===href?"selected":""}>{label}</Link>)}<Link href="/" className="preview-link">↗ View Portfolio</Link></aside><main className="setup-main">{children}</main></div>;
 }

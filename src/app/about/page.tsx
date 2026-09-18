@@ -17,7 +17,7 @@ export default function About() {
       <article className="bento-card large"><h2>Professional Profile</h2><p>{data.profile.heroDescription}</p><p>My work spans software testing, SDLC, enterprise implementations, automation, performance engineering, documentation, stakeholder collaboration, mentoring and release readiness.</p></article>
     </section>
     <section className="shell bento-section">
-      <div className="section-heading"><div><span className="eyebrow">TECHNICAL EXPERTISE</span><h2>Capabilities grouped by outcomes</h2></div></div>
+      <div className="section-heading"><div><h3 className="eyebrow">TECHNICAL EXPERTISE</h3><h2>Capabilities grouped by outcomes</h2></div></div>
       <div className="skill-grid">{data.skills.map((s) => <article className="bento-card" key={s.group}><h3>{s.group}</h3><div className="tags roomy">{s.items.map((i) => <span key={i}>{i}</span>)}</div></article>)}</div>
     </section>
   </main><SiteFooter /></>;

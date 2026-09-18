@@ -17,7 +17,7 @@ export default function Home() {
         <section className="hero">
           <div className="shell hero-grid">
             <div>
-              <span className="eyebrow">{data.profile.eyebrow}</span>
+              <h3 className="eyebrow">{data.profile.eyebrow}</h3>
               <h1>{data.profile.heroTitle}</h1>
               <p className="hero-copy">{data.profile.heroDescription}</p>
 
@@ -67,7 +67,7 @@ export default function Home() {
         <section className="shell bento-section">
           <div className="section-heading">
             <div>
-              <span className="eyebrow">SELECTED WORK</span>
+              <h3 className="eyebrow">SELECTED WORK</h3>
               <h2>Evidence of quality engineering in practice</h2>
             </div>
             <Link href="/projects">View all projects →</Link>
@@ -91,7 +91,7 @@ export default function Home() {
 
         <section className="shell split-section">
           <article className="bento-card large">
-            <span className="eyebrow">LEADERSHIP</span>
+            <h3 className="eyebrow">LEADERSHIP</h3>
             <h2>Building quality capability, not only test coverage.</h2>
             <p>{data.leadership.subtitle}</p>
             <Link className="text-link" href="/leadership">
@@ -100,7 +100,7 @@ export default function Home() {
           </article>
 
           <article className="bento-card large">
-            <span className="eyebrow">EXPERTISE</span>
+            <h3 className="eyebrow">EXPERTISE</h3>
             <h2>Strategy, automation, API and performance.</h2>
             <div className="tags roomy">
               {data.skills
@@ -118,7 +118,7 @@ export default function Home() {
 
         <section className="shell cta">
           <div>
-            <span className="eyebrow">LET&apos;S CONNECT</span>
+            <h3 className="eyebrow">LET&apos;S CONNECT</h3>
             <h2>Engineering quality for confident delivery.</h2>
             <p>
               Open to professional conversations about QA leadership, software
