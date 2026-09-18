@@ -28,12 +28,12 @@
     {
       "label": "ERP",
       "title": "Enterprise Quality",
-      "detail": "ERP · HRMS · Recruitment"
+      "detail": "HRMS · E-Recruitment · Payroll · ePMS"
     },
     {
-      "label": "AUTO",
+      "label": "TEST",
       "title": "Automation",
-      "detail": "Playwright · Selenium"
+      "detail": "Python-Playwright · Selenium-Java"
     }
   ],
   "skills": [
@@ -97,7 +97,8 @@
         "QA Leadership",
         "Automation",
         "Performance",
-        "Release Readiness"
+        "Release Readiness",
+        "AI-Driven Quality Engineering"
       ]
     },
     {
@@ -180,7 +181,7 @@
       "category": "Enterprise Systems",
       "description": "Quality assurance for enterprise HR and business processes, including functional, integration, regression and release validation.",
       "tools": [
-        "ERP/HRMS",
+        "AI-Driven Quality Engineering",
         "Functional Testing",
         "Regression"
       ],
@@ -194,7 +195,7 @@
       "tools": [
         "Web Testing",
         "API Validation",
-        "UAT"
+        "Integration Testing"
       ],
       "featured": true
     },
@@ -204,8 +205,8 @@
       "category": "Automation",
       "description": "UI automation and regression coverage using Selenium-Java and Playwright-Python approaches.",
       "tools": [
-        "Playwright",
         "Python",
+        "Playwright",
         "Selenium",
         "Java"
       ],

@@ -29,6 +29,42 @@ export function PortfolioProvider({ children }: { children: React.ReactNode }) {
         if (parsed.profile?.image === "https://github.com/Kazihamid.png?size=480") {
           parsed.profile.image = defaults.profile.image;
         }
+
+        // Migrate content labels changed in the current portfolio design.
+        parsed.highlights?.forEach((item) => {
+          if (item.label === "AUTO") item.label = "TEST";
+
+          if (item.title === "Enterprise Quality") {
+            item.detail = "HRMS · E-Recruitment · Payroll · ePMS";
+          }
+
+          if (item.title === "Automation") {
+            item.detail = "Python-Playwright · Selenium-Java";
+          }
+        });
+        const technicalLead = parsed.experience?.find(
+          (item) => item.role === "Technical Lead – Software Quality Assurance"
+        );
+        if (technicalLead && !technicalLead.focus.includes("AI-Driven Quality Engineering")) {
+          technicalLead.focus.push("AI-Driven Quality Engineering");
+        }
+
+        parsed.projects?.forEach((project) => {
+          if (project.id === "erp-hrms") {
+            project.tools = project.tools.map((tool) =>
+              tool === "ERP/HRMS" ? "AI-Driven Quality Engineering" : tool
+            );
+          }
+          if (project.id === "erecruitment") {
+            project.tools = project.tools.map((tool) =>
+              tool === "UAT" ? "Integration Testing" : tool
+            );
+          }
+          if (project.id === "automation") {
+            project.tools = ["Python", "Playwright", "Selenium", "Java"];
+          }
+        });
+
         setData(parsed);
       }
     } catch {
