@@ -9,6 +9,16 @@ const philosophyIcons: IconName[] = ["quality","risk","shift","improvement"];
 const leadIcons: IconName[] = ["strategy","shield","automation","release","collaboration","report"];
 const mentoringIcons: IconName[] = ["mentor","review","automation","knowledge","career","leadership"];
 
+const qualityProcessVisuals: Array<{ icon: IconName; detail: string; tone: string }> = [
+  { icon: "requirement", detail: "Understand business needs", tone: "blue" },
+  { icon: "risk", detail: "Identify & assess risks", tone: "violet" },
+  { icon: "strategy", detail: "Plan the right approach", tone: "blue" },
+  { icon: "automation", detail: "Increase coverage & speed", tone: "blue" },
+  { icon: "validation", detail: "Ensure quality & compliance", tone: "green" },
+  { icon: "release", detail: "Enable safe delivery", tone: "blue" },
+  { icon: "improvement", detail: "Learn & evolve", tone: "green" },
+];
+
 export default function Leadership() {
   const { data } = usePortfolio();
   const l = data.leadership;
@@ -23,9 +33,26 @@ export default function Leadership() {
       <div className="principle-grid">{l.philosophy.map((p,index)=><article className="bento-card philosophy-card" key={p.title}><ProfessionalIcon name={philosophyIcons[index] ?? "quality"} className={`icon-badge icon-tone-${(index%4)+1}`} /><h3>{p.title}</h3><p>{p.text}</p></article>)}</div>
     </section>
 
-    <section className="shell bento-card large process-card">
-      <div className="card-title-row no-leading-icon"><div><h3 className="eyebrow">02 · HOW I THINK ABOUT QUALITY</h3><h2>From requirements to continuous improvement</h2></div></div>
-      <div className="process-flow">{l.process.map((p,i)=><div className="process-step" key={p}><span>{String(i+1).padStart(2,"0")}</span><strong>{p}</strong></div>)}</div>
+    <section className="shell bento-card large process-card quality-process-card">
+      <div className="quality-process-heading">
+        <div>
+          <h3 className="eyebrow">02 · HOW I THINK ABOUT QUALITY</h3>
+          <h2>From requirements to continuous improvement</h2>
+          <p>A structured, end-to-end approach to delivering quality software.</p>
+        </div>
+      </div>
+      <div className="quality-process-flow">
+        {l.process.map((p,i)=>{
+          const visual = qualityProcessVisuals[i] ?? qualityProcessVisuals[0];
+          return <div className="quality-process-node" key={p}>
+            <div className={`quality-process-icon quality-process-${visual.tone}`}>
+              <ProfessionalIcon name={visual.icon} />
+            </div>
+            <strong>{p}</strong>
+            <span className="quality-process-detail">{visual.detail}</span>
+          </div>;
+        })}
+      </div>
     </section>
 
     <section className="shell split-section">
