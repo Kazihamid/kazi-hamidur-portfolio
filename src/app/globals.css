@@ -90,3 +90,36 @@
 .admin-icon{width:28px;height:28px;color:#167fdf;padding:5px;border-radius:9px;background:#e9f4ff;border:1px solid #cfe6fa}.admin-title-row{display:flex;align-items:center;gap:9px}.admin-title-row h2{margin:0}.stat{gap:4px}.stat .admin-icon{margin-bottom:6px}.check-list li{display:flex;align-items:center;gap:8px}.check-icon{width:17px;height:17px;color:#1aae87;flex:0 0 17px}
 
 @media(max-width:600px){.icon-badge{width:38px;height:38px;padding:8px}.card-title-row{gap:10px}.cta-copy{gap:10px}.metric-card-top strong{font-size:17px}.social-row{gap:14px;flex-wrap:wrap}}
+
+/* v1.2 — alignment refinements */
+/* Project category labels: keep key text directly beside its icon. */
+.project-card .card-icon-row{
+  justify-content:flex-start;
+}
+.project-card .card-icon-row .pill{
+  margin-left:0;
+}
+
+/* Certification periods: consistently align year/time pills to the left. */
+.certification-card-row{
+  justify-content:flex-start;
+}
+.certification-card-row .pill{
+  margin-left:0;
+}
+
+/* Quality-thinking steps: keep 01–07 on one parallel top baseline. */
+.process-step{
+  justify-content:flex-start;
+}
+.process-step span{
+  margin-top:0;
+}
+.process-step strong{
+  margin-top:14px;
+}
+
+/* Keep CTA label on a single line on desktop. */
+.cta .button{
+  white-space:nowrap;
+}
