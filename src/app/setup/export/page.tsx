@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePortfolio, type PortfolioData } from "@/context/PortfolioContext";
 import { exportExcelCompatible, exportJson, exportProjectsCsv } from "@/lib/exporters";
@@ -24,6 +24,15 @@ export default function ExportCenter() {
   const ref = useRef<HTMLInputElement>(null);
   const [message, setMessage] = useState("");
   const [writing, setWriting] = useState(false);
+  const [isLocalWorkspace, setIsLocalWorkspace] = useState(false);
+  const [canWriteFile, setCanWriteFile] = useState(false);
+
+  useEffect(() => {
+    const hostname = window.location.hostname;
+    const local = hostname === "localhost" || hostname === "127.0.0.1";
+    setIsLocalWorkspace(local);
+    setCanWriteFile(local && "showSaveFilePicker" in window);
+  }, []);
 
   function importJson(file?: File) {
     if (!file) return;
@@ -43,6 +52,15 @@ export default function ExportCenter() {
 
   async function updateCodebaseJson() {
     const json = `${JSON.stringify(data, null, 2)}\n`;
+
+    if (!isLocalWorkspace) {
+      downloadRepositoryJson(data);
+      setMessage(
+        "Hosted GitHub Pages cannot write into your local Git repository. portfolio.json was downloaded. Copy it to your local project at src/data/portfolio.json, replace the existing file, then commit and push the change."
+      );
+      return;
+    }
+
     const picker = (window as typeof window & {
       showSaveFilePicker?: (options?: unknown) => Promise<{
         createWritable: () => Promise<{
@@ -55,7 +73,7 @@ export default function ExportCenter() {
     if (!picker) {
       downloadRepositoryJson(data);
       setMessage(
-        "Your browser cannot write directly to a repository file. portfolio.json was downloaded. Replace src/data/portfolio.json with that file, then run git status."
+        "This browser does not support direct file replacement. portfolio.json was downloaded. Replace src/data/portfolio.json manually, then run git status."
       );
       return;
     }
@@ -118,22 +136,45 @@ export default function ExportCenter() {
         </article>
 
         <article className="admin-card">
-          <h2>Update Codebase</h2>
-          <p>
-            Save the current Setup data into the repository&apos;s <strong>src/data/portfolio.json</strong> file.
-            When the file picker opens, select that existing file and confirm Replace/Save.
-          </p>
+          <h2>{isLocalWorkspace ? "Update Codebase" : "Prepare Codebase Update"}</h2>
+          {isLocalWorkspace ? (
+            <p>
+              Save the current Setup data into the repository&apos;s <strong>src/data/portfolio.json</strong> file.
+              When the file picker opens, select that existing file and confirm Replace/Save.
+            </p>
+          ) : (
+            <p>
+              This hosted GitHub Pages site cannot directly modify files inside your local Git repository.
+              Download the generated <strong>portfolio.json</strong>, then replace
+              <strong> src/data/portfolio.json</strong> in your local project before committing and pushing.
+            </p>
+          )}
           <div className="actions wrap">
             <button className="button" disabled={writing} onClick={updateCodebaseJson}>
-              {writing ? "Writing…" : "Update Codebase JSON"}
+              {writing
+                ? "Writing…"
+                : isLocalWorkspace && canWriteFile
+                  ? "Update Codebase JSON"
+                  : "Download for Codebase"}
             </button>
-            <button className="button secondary" onClick={() => downloadRepositoryJson(data)}>
-              Download portfolio.json
-            </button>
+            {isLocalWorkspace && (
+              <button className="button secondary" onClick={() => downloadRepositoryJson(data)}>
+                Download portfolio.json
+              </button>
+            )}
           </div>
           <p className="muted">
-            After updating the codebase, run <strong>git status</strong>. You should see
-            <strong> src/data/portfolio.json</strong> as modified.
+            {isLocalWorkspace ? (
+              <>
+                After updating the codebase, run <strong>git status</strong>. You should see
+                <strong> src/data/portfolio.json</strong> as modified.
+              </>
+            ) : (
+              <>
+                Local path: <strong>src/data/portfolio.json</strong>. After replacing it, run
+                <strong> git status</strong>, then commit and push your branch.
+              </>
+            )}
           </p>
         </article>
 
