@@ -21,7 +21,7 @@ export default function Projects(){
   const [filter,setFilter]=useState("All");
   const cats=useMemo(()=>["All",...Array.from(new Set(data.projects.map(p=>p.category)))],[data.projects]);
   const shown=filter==="All"?data.projects:data.projects.filter(p=>p.category===filter);
-  return <><SiteHeader/><main>
+  return <><SiteHeader/><main className="projects-page">
     <PageHero eyebrow="PROJECTS" title="Selected Work & Quality Engineering" description="Enterprise systems, automation, API validation and performance engineering presented as focused professional work areas."/>
     <section className="shell">
       <div className="filter-row">{cats.map(c=><button key={c} onClick={()=>setFilter(c)} className={filter===c?"filter active":"filter"}>{c}</button>)}</div>

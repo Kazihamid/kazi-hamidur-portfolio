@@ -39,14 +39,26 @@ export function PortfolioProvider({ children }: { children: React.ReactNode }) {
           }
 
           if (item.title === "Automation") {
-            item.detail = "Python-Playwright · Selenium-Java";
+            item.detail = "Playwright-Python · Selenium-Java";
           }
         });
         parsed.skills?.forEach((group) => {
           if (group.group === "Automation") {
-            group.items = group.items.map((item) =>
-              item === "Playwright + Python" ? "Python + Playwright" : item
-            );
+            group.items = group.items.map((item) => {
+              if (
+                item === "Python + Playwright" ||
+                item === "Playwright + Python" ||
+                item === "Python-Playwright"
+              ) {
+                return "Playwright-Python";
+              }
+
+              if (item === "Selenium + Java") {
+                return "Selenium-Java";
+              }
+
+              return item;
+            });
           }
         });
 
@@ -69,7 +81,9 @@ export function PortfolioProvider({ children }: { children: React.ReactNode }) {
             );
           }
           if (project.id === "automation") {
-            project.tools = ["Python", "Playwright", "Selenium", "Java"];
+            project.description =
+              "UI automation and regression coverage using Playwright-Python and Selenium-Java approaches.";
+            project.tools = ["Playwright", "Python", "Selenium", "Java"];
           }
         });
 

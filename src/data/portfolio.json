@@ -33,7 +33,7 @@
     {
       "label": "TEST",
       "title": "Automation",
-      "detail": "Python-Playwright · Selenium-Java"
+      "detail": "Playwright-Python · Selenium-Java"
     }
   ],
   "skills": [
@@ -51,8 +51,8 @@
     {
       "group": "Automation",
       "items": [
-        "Python + Playwright",
-        "Selenium + Java",
+        "Playwright-Python",
+        "Selenium-Java",
         "Regression Automation",
         "Framework Design"
       ]
@@ -203,10 +203,10 @@
       "id": "automation",
       "title": "Test Automation Engineering",
       "category": "Automation",
-      "description": "UI automation and regression coverage using Selenium-Java and Playwright-Python approaches.",
+      "description": "UI automation and regression coverage using Playwright-Python and Selenium-Java approaches.",
       "tools": [
-        "Python",
         "Playwright",
+        "Python",
         "Selenium",
         "Java"
       ],
