@@ -326,3 +326,366 @@
   .setup-save-actions .button{width:100%}
 }
 @media print{.setup-savebar{display:none!important}}
+
+/* v1.9 — Setup profile image upload + visible light-theme controls */
+.profile-image-editor{
+  display:grid;
+  gap:10px;
+  padding:14px;
+  border:1px solid #d6e4ef;
+  border-radius:12px;
+  background:#f7fbff;
+}
+.profile-image-editor-heading{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:18px;
+}
+.profile-image-editor-heading strong{
+  display:block;
+  color:#243e54;
+  font-size:14px;
+  margin-bottom:4px;
+}
+.profile-image-editor-heading p,.profile-image-help{
+  margin:0;
+  color:#60778b;
+  font-size:12.5px;
+  line-height:1.5;
+}
+.setup-upload-button{
+  flex:0 0 auto;
+  white-space:nowrap;
+}
+.image-upload-message{
+  margin:0;
+  padding:9px 11px;
+  border-radius:8px;
+  font-size:12.5px;
+  font-weight:650;
+}
+.image-upload-message.success{
+  color:#176d59;
+  border:1px solid #a9dfd0;
+  background:#eaf9f4;
+}
+.image-upload-message.error{
+  color:#ad2d38;
+  border:1px solid #f0bec3;
+  background:#fff0f2;
+}
+.image-path-button{
+  width:max-content;
+  margin-top:2px;
+}
+
+/* Secondary buttons were designed for the public dark theme.
+   Give them a visible setup-specific treatment on the light admin screens. */
+.setup-main .button.secondary{
+  background:#e7f3ff;
+  border-color:#72a9d5;
+  color:#075d9a;
+  box-shadow:0 3px 10px rgba(33,105,160,.08);
+}
+.setup-main .button.secondary:hover:not(:disabled){
+  background:#d7ecff;
+  border-color:#398dc9;
+  color:#064f83;
+}
+.setup-main .button.secondary:focus-visible{
+  outline:3px solid rgba(23,135,255,.20);
+  outline-offset:2px;
+}
+.setup-main .button.secondary:disabled,
+.setup-savebar .button.secondary:disabled{
+  opacity:1;
+  cursor:not-allowed;
+  color:#6d8293;
+  border-color:#c5d5e1;
+  background:#edf3f7;
+  box-shadow:none;
+}
+.setup-main .button:disabled{
+  cursor:not-allowed;
+}
+
+@media(max-width:700px){
+  .profile-image-editor-heading{
+    flex-direction:column;
+  }
+  .setup-upload-button{
+    width:100%;
+  }
+}
+
+
+/* v2.0 — Setup profile image actions: aligned, responsive upload/reset controls */
+.profile-image-editor-heading{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  align-items:start;
+  gap:16px;
+}
+.profile-image-copy{min-width:0}
+.profile-image-actions{
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  flex-wrap:wrap;
+  gap:8px;
+  max-width:100%;
+}
+.profile-image-actions .button{
+  min-height:40px;
+  white-space:nowrap;
+}
+.profile-image-actions .button-icon{
+  width:16px;
+  height:16px;
+  margin-right:7px;
+}
+.setup-reset-image-button{
+  min-width:128px;
+}
+.profile-image-editor label{min-width:0}
+.profile-image-editor input{min-width:0}
+
+@media(max-width:860px){
+  .profile-image-editor-heading{grid-template-columns:1fr}
+  .profile-image-actions{
+    justify-content:flex-start;
+    width:100%;
+  }
+  .profile-image-actions .button{
+    flex:1 1 180px;
+  }
+}
+@media(max-width:520px){
+  .profile-image-actions{
+    flex-direction:column;
+    align-items:stretch;
+  }
+  .profile-image-actions .button{
+    width:100%;
+    flex:none;
+  }
+}
+
+/* v2.1 — Keep uploaded 4:5 profile images fully visible in Setup preview and Home hero */
+.admin-avatar{
+  width:150px;
+  height:auto;
+  aspect-ratio:4/5;
+  object-fit:contain;
+  object-position:center;
+  background:#f4f8fb;
+}
+
+.hero .portrait-wrap{
+  min-height:410px;
+  padding:14px 18px 0;
+  align-items:flex-end;
+  justify-content:center;
+}
+
+.hero .portrait-wrap img{
+  display:block;
+  width:auto;
+  height:390px;
+  max-width:92%;
+  object-fit:contain;
+  object-position:center bottom;
+  background:transparent;
+  border-radius:16px 16px 0 0;
+}
+
+@media(max-width:900px){
+  .hero .portrait-wrap{
+    min-height:370px;
+    padding:12px 16px 0;
+  }
+  .hero .portrait-wrap img{
+    width:auto;
+    height:350px;
+    max-width:92%;
+    object-fit:contain;
+  }
+}
+
+@media(max-width:600px){
+  .hero .portrait-wrap{
+    min-height:335px;
+    padding:10px 12px 0;
+  }
+  .hero .portrait-wrap img{
+    width:auto;
+    height:320px;
+    max-width:94%;
+    object-fit:contain;
+  }
+  .admin-avatar{
+    width:132px;
+  }
+}
+
+/* v2.2 — Project text formatting + optional profile image zoom/fitting */
+/* Preserve line breaks and spacing entered from Setup on the public Projects page. */
+.projects-page .project-card > p{
+  white-space:pre-wrap;
+  overflow-wrap:anywhere;
+  text-align:left;
+}
+
+.profile-image-adjuster{
+  display:grid;
+  grid-template-columns:minmax(190px,240px) minmax(0,1fr);
+  gap:18px;
+  align-items:center;
+  margin:14px 0;
+  padding:14px;
+  border:1px solid #cddde9;
+  border-radius:12px;
+  background:#f7fbfe;
+}
+.profile-crop-stage{
+  position:relative;
+  width:min(100%,220px);
+  aspect-ratio:4/5;
+  overflow:hidden;
+  justify-self:center;
+  border:1px solid #9ec5e0;
+  border-radius:14px;
+  background:
+    linear-gradient(45deg,#eaf2f8 25%,transparent 25%),
+    linear-gradient(-45deg,#eaf2f8 25%,transparent 25%),
+    linear-gradient(45deg,transparent 75%,#eaf2f8 75%),
+    linear-gradient(-45deg,transparent 75%,#eaf2f8 75%);
+  background-size:20px 20px;
+  background-position:0 0,0 10px,10px -10px,-10px 0;
+}
+.profile-crop-stage img{
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center;
+  transform-origin:center center;
+  user-select:none;
+  pointer-events:none;
+}
+.profile-crop-guide{
+  position:absolute;
+  left:8px;
+  bottom:8px;
+  z-index:2;
+  padding:4px 7px;
+  border-radius:999px;
+  background:rgba(7,26,45,.82);
+  color:#fff;
+  font-size:10px;
+  letter-spacing:.03em;
+}
+.profile-zoom-panel{
+  min-width:0;
+  display:grid;
+  gap:12px;
+}
+.profile-zoom-heading{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  color:#24465f;
+}
+.profile-zoom-heading span{
+  min-width:54px;
+  text-align:center;
+  padding:5px 8px;
+  border-radius:999px;
+  background:#e4f1fb;
+  border:1px solid #c0dced;
+  color:#096dcc;
+  font-weight:800;
+  font-size:12px;
+}
+.profile-zoom-controls{
+  display:grid;
+  grid-template-columns:40px minmax(0,1fr) 40px;
+  align-items:center;
+  gap:10px;
+}
+.zoom-button{
+  width:40px;
+  height:40px;
+  display:grid;
+  place-items:center;
+  border:1px solid #8cb9d8;
+  border-radius:9px;
+  background:#e9f5ff;
+  color:#096dcc;
+  font-size:24px;
+  line-height:1;
+  cursor:pointer;
+}
+.zoom-button:hover:not(:disabled){background:#dcedfb;border-color:#5e9dcc}
+.zoom-button:disabled{opacity:.45;cursor:not-allowed}
+.zoom-range{
+  width:100%;
+  accent-color:#0b78e3;
+  cursor:pointer;
+}
+.profile-zoom-actions{
+  display:flex;
+  justify-content:flex-end;
+  gap:8px;
+  flex-wrap:wrap;
+}
+
+@media(max-width:760px){
+  .profile-image-adjuster{
+    grid-template-columns:1fr;
+  }
+  .profile-crop-stage{
+    width:min(100%,230px);
+  }
+  .profile-zoom-actions{
+    justify-content:flex-start;
+  }
+}
+@media(max-width:480px){
+  .profile-image-adjuster{padding:12px;gap:14px}
+  .profile-zoom-controls{grid-template-columns:38px minmax(0,1fr) 38px;gap:8px}
+  .zoom-button{width:38px;height:38px}
+  .profile-zoom-actions{flex-direction:column}
+  .profile-zoom-actions .button{width:100%}
+}
+
+
+/* v2.3 — Drag-to-position profile image inside the 4:5 crop frame */
+.profile-crop-stage{
+  cursor:grab;
+  touch-action:none;
+  overscroll-behavior:contain;
+}
+.profile-crop-stage.is-dragging{
+  cursor:grabbing;
+}
+.profile-crop-stage img{
+  width:auto;
+  height:auto;
+  max-width:none;
+  max-height:none;
+  object-fit:fill;
+  transform:translate(-50%,-50%);
+  transform-origin:center center;
+  will-change:left,top,width,height;
+}
+.profile-crop-stage.is-dragging img{
+  transition:none;
+}
+.profile-crop-guide{
+  pointer-events:none;
+}
