@@ -176,6 +176,16 @@
   ],
   "projects": [
     {
+      "id": "project-1789909763990",
+      "title": "20-20 Commercial Software ",
+      "category": "Commercial Design & Manufacturing Software",
+      "description": "20-20 Commercial Software - 2D/3D CAD, Space Planning & Visualization suite included:\n\n · 20-20 Worksheet – product/order and specification workflow.\n · 20-20 Giza Designer – space planning and design.\n · 20-20 CAP Designer – cabinet design and manufacturing-related design.\n · 20-20 Visual Impression – 3D visualization and presentation. \n\nI was responsible for overall product quality assurance and QA leadership across the project lifecycle. Defined QA strategy, scope, resources, and deliverables while leading functional, integration, regression, security, usability, compatibility, and performance testing.",
+      "tools": [
+        "AutoCAD"
+      ],
+      "featured": true
+    },
+    {
       "id": "erp-hrms",
       "title": "ERP / HRMS Quality Assurance",
       "category": "Enterprise Systems",
