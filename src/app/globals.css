@@ -689,3 +689,62 @@
 .profile-crop-guide{
   pointer-events:none;
 }
+
+
+/* v2.7 — Home Selected Work formatting */
+/* Match the Projects screen: preserve line breaks/spacing entered in Setup. */
+.home-selected-work .project-card > .project-description{
+  white-space:pre-wrap;
+  overflow-wrap:anywhere;
+  text-align:left;
+}
+
+
+/* v2.8 — Home project formatting + visible print-view navigation */
+/* Render every newline from Setup as its own visual line on Home Selected Work. */
+.home-selected-work .project-description{
+  margin:1em 0;
+  color:var(--muted);
+  line-height:1.55;
+  text-align:left;
+  overflow-wrap:anywhere;
+}
+.home-selected-work .project-description-line{
+  display:block;
+  white-space:break-spaces;
+  min-width:0;
+}
+
+/* Resume/print view is white, so the generic light secondary button can disappear.
+   Give the Back button an explicit high-contrast treatment beside Print / Save as PDF. */
+.resume-actions{
+  align-items:center;
+  flex-wrap:wrap;
+}
+.resume-back-button{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:42px;
+  padding:10px 16px;
+  border:1px solid #397dad;
+  border-radius:9px;
+  background:#eef6ff;
+  color:#0d5592;
+  font-weight:700;
+  text-decoration:none;
+  box-shadow:0 4px 12px rgba(13,85,146,.08);
+  transition:background .18s ease,border-color .18s ease,transform .18s ease;
+}
+.resume-back-button:hover{
+  background:#dceeff;
+  border-color:#176fb2;
+  transform:translateY(-1px);
+}
+@media(max-width:600px){
+  .resume-actions{justify-content:stretch}
+  .resume-actions .button,.resume-back-button{width:100%}
+}
+@media print{
+  .resume-back-button{display:none!important}
+}

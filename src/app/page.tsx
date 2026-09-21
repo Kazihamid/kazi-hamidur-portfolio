@@ -24,9 +24,43 @@ function projectIcon(category: string, title: string): IconName {
   return "project";
 }
 
+
+function ProjectDescription({ text }: { text: string }) {
+  const lines = text.replace(/\r\n/g, "\n").split("\n");
+
+  return (
+    <div className="project-description" aria-label="Project description">
+      {lines.map((line, index) => (
+        <span className="project-description-line" key={`${index}-${line.slice(0, 20)}`}>
+          {line || "\u00A0"}
+        </span>
+      ))}
+    </div>
+  );
+}
+
+function projectAddedAt(id: string) {
+  const match = /^project-(\d+)$/.exec(id);
+  return match ? Number(match[1]) : null;
+}
+
 export default function Home() {
   const { data } = usePortfolio();
-  const featured = data.projects.filter((p) => p.featured).slice(0, 3);
+
+  // Projects created from Setup use project-<timestamp> IDs. Keep the most
+  // recently added projects first, while preserving repository order for
+  // legacy projects that do not have a timestamp-based ID.
+  const featured = data.projects
+    .map((project, index) => ({ project, index, addedAt: projectAddedAt(project.id) }))
+    .filter(({ project }) => project.featured)
+    .sort((a, b) => {
+      if (a.addedAt !== null && b.addedAt !== null) return b.addedAt - a.addedAt;
+      if (a.addedAt !== null) return -1;
+      if (b.addedAt !== null) return 1;
+      return a.index - b.index;
+    })
+    .slice(0, 3)
+    .map(({ project }) => project);
 
   return (
     <>
@@ -76,7 +110,7 @@ export default function Home() {
           ))}
         </section>
 
-        <section className="shell bento-section">
+        <section className="shell bento-section home-selected-work">
           <div className="section-heading">
             <div>
               <h3 className="eyebrow">SELECTED WORK</h3>
@@ -93,7 +127,7 @@ export default function Home() {
                   <span className="pill">{p.category}</span>
                 </div>
                 <h3>{p.title}</h3>
-                <p>{p.description}</p>
+                <ProjectDescription text={p.description} />
                 <div className="tags">
                   {p.tools.map((t) => <span key={t}>{t}</span>)}
                 </div>
