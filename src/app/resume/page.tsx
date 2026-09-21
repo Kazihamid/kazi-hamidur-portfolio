@@ -6,7 +6,7 @@ import Link from "next/link";
 export default function Resume() {
   const { data } = usePortfolio();
   return <main className="resume-page">
-    <div className="resume-actions"><button className="button" onClick={() => window.print()}>Print / Save as PDF</button><Link className="button secondary" href="/setup/export">Back to Export Center</Link></div>
+    <div className="resume-actions"><button className="button" onClick={() => window.print()}>Print / Save as PDF</button><Link className="resume-back-button" href="/setup/export">← Back to Import / Export</Link></div>
     <header className="resume-head"><div><h1>{data.profile.name}</h1><h2>{data.profile.title}</h2><p>{data.profile.email} · {data.profile.location}</p><p>{data.profile.linkedin} · {data.profile.github}</p></div><img src={assetPath(data.profile.image)} alt={data.profile.name} /></header>
     <section><h2>Professional Summary</h2><p>{data.profile.heroDescription}</p></section>
     <section><h2>Core Competencies</h2><div className="resume-tags">{data.skills.flatMap((s) => s.items).map((x) => <span key={x}>{x}</span>)}</div></section>

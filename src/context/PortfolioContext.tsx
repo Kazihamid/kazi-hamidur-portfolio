@@ -1,6 +1,7 @@
 "use client";
 
 import React, { createContext, useContext, useEffect, useMemo, useState } from "react";
+import { usePathname } from "next/navigation";
 import defaults from "@/data/portfolio.json";
 
 export type PortfolioData = typeof defaults;
@@ -90,6 +91,8 @@ function migrateDraft(parsed: PortfolioData) {
 }
 
 export function PortfolioProvider({ children }: { children: React.ReactNode }) {
+  const pathname = usePathname();
+  const isSetupRoute = /(^|\/)setup(\/|$)/.test(pathname);
   const [data, setData] = useState<PortfolioData>(defaults);
   const [hydrated, setHydrated] = useState(false);
   const [savedSnapshot, setSavedSnapshot] = useState(() => JSON.stringify(defaults));
@@ -97,6 +100,18 @@ export function PortfolioProvider({ children }: { children: React.ReactNode }) {
   const [lastSavedAt, setLastSavedAt] = useState<string | null>(null);
 
   useEffect(() => {
+    // Public pages must always render the deployed repository data. Browser
+    // drafts belong only to /setup so an old localStorage draft can never
+    // override a newer GitHub Pages deployment for visitors.
+    if (!isSetupRoute) {
+      setData(defaults);
+      setSavedSnapshot(JSON.stringify(defaults));
+      setHasSavedDraft(false);
+      setLastSavedAt(null);
+      setHydrated(true);
+      return;
+    }
+
     try {
       const stored = localStorage.getItem(STORAGE_KEY);
       const savedAt = localStorage.getItem(SAVED_AT_KEY);
@@ -122,7 +137,7 @@ export function PortfolioProvider({ children }: { children: React.ReactNode }) {
     } finally {
       setHydrated(true);
     }
-  }, []);
+  }, [isSetupRoute]);
 
   const currentSnapshot = useMemo(() => JSON.stringify(data), [data]);
   const dirty = hydrated && currentSnapshot !== savedSnapshot;
