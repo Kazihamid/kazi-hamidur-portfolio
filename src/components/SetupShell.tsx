@@ -37,6 +37,7 @@ export function SetupShell({ children }: {children: React.ReactNode}) {
     lastSavedAt,
     saveDraft,
     discardChanges,
+    reset,
   } = usePortfolio();
 
   const savedTime = formatSavedTime(lastSavedAt);
@@ -72,6 +73,23 @@ export function SetupShell({ children }: {children: React.ReactNode}) {
         </div>
       </div>
       <div className="setup-save-actions">
+        <button
+          type="button"
+          className="button secondary compact"
+          disabled={!hydrated}
+          onClick={() => {
+            if (
+              confirm(
+                "Reload the deployed repository data? This will remove the browser-saved setup draft for this site."
+              )
+            ) {
+              reset();
+            }
+          }}
+          title="Clear this browser draft and load the data deployed from src/data/portfolio.json"
+        >
+          Reload Deployed
+        </button>
         <button
           type="button"
           className="button secondary compact"

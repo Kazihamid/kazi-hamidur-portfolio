@@ -112,11 +112,26 @@ function normalizePortfolio(input: BasePortfolioData | PortfolioData): Portfolio
     technicalLead.focus.push("AI-Driven Quality Engineering");
   }
 
-  parsed.projects = (parsed.projects ?? []).map((project) => ({
-    ...project,
-    startDate: project.startDate ?? "",
-    endDate: project.endDate ?? "",
-  }));
+  // Migrate older browser drafts without losing newly deployed project dates.
+  // Localhost and GitHub Pages use different localStorage origins, so an old
+  // live-site draft can otherwise hide fields added in a newer deployment.
+  parsed.projects = (parsed.projects ?? []).map((project) => {
+    const deployedProject = (defaults.projects as PortfolioProject[]).find(
+      (item) => item.id === project.id
+    );
+
+    return {
+      ...project,
+      startDate:
+        typeof project.startDate === "string"
+          ? project.startDate
+          : deployedProject?.startDate ?? "",
+      endDate:
+        typeof project.endDate === "string"
+          ? project.endDate
+          : deployedProject?.endDate ?? "",
+    };
+  });
 
   parsed.projects.forEach((project) => {
     if (project.id === "erp-hrms") {
