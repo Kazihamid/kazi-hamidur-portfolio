@@ -5,6 +5,7 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { PageHero } from "@/components/PageHero";
 import { ProfessionalIcon } from "@/components/ProfessionalIcon";
 import { usePortfolio } from "@/context/PortfolioContext";
+import { assetPath } from "@/lib/paths";
 
 function displayDate(value: string) {
   const date = new Date(value);
@@ -40,7 +41,7 @@ export default function RecommendationsPage() {
             const initials = item.name.split(/\s+/).map((part) => part[0]).slice(0, 2).join("");
             return <article className="recommendation-card recommendation-card-full" key={item.id}>
               <div className="recommendation-person">
-                <div className="recommendation-avatar" aria-hidden="true">{initials}</div>
+                <div className="recommendation-avatar" aria-hidden="true">{item.image ? <img src={assetPath(item.image)} alt="" /> : initials}</div>
                 <div>
                   <h2>{item.name}</h2>
                   <p>{item.headline}</p>

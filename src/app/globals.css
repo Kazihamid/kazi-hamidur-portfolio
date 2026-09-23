@@ -817,3 +817,65 @@
   .recommendation-person{grid-template-columns:44px 1fr}
   .recommendation-quote-icon{display:none}
 }
+
+
+/* v3.0 — project formatting, recommendation photos, aligned project dates */
+/* Projects page: every newline entered in Setup becomes a real visual line. */
+.projects-page .project-description{
+  margin:1em 0;
+  color:var(--muted);
+  line-height:1.55;
+  text-align:left;
+  overflow-wrap:anywhere;
+  white-space:pre-wrap;
+}
+.projects-page .project-description-line{
+  display:block;
+  white-space:break-spaces;
+  min-width:0;
+}
+
+/* Recommendation images use a consistent LinkedIn-like circular avatar. */
+.recommendation-avatar{overflow:hidden}
+.recommendation-avatar img{
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center;
+  border-radius:50%;
+}
+.recommendation-image-field{grid-column:1 / -1}
+
+/* Keep Start/End date controls perfectly parallel and make native pickers clear. */
+.project-date-grid{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  gap:16px;
+  align-items:start;
+  margin:12px 0 4px;
+}
+.project-date-grid label{
+  display:grid;
+  grid-template-rows:auto 52px;
+  gap:7px;
+  align-content:start;
+}
+.project-date-grid input[type="month"]{
+  width:100%;
+  height:52px;
+  min-height:52px;
+  margin:0;
+  color-scheme:dark;
+}
+.project-date-help{
+  display:block;
+  margin:0 0 10px;
+  color:#7a8f9f;
+  font-weight:500;
+  line-height:1.35;
+}
+@media(max-width:600px){
+  .project-date-grid{grid-template-columns:1fr}
+  .project-date-grid label{grid-template-rows:auto 52px}
+}

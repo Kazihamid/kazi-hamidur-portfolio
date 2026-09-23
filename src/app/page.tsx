@@ -140,7 +140,7 @@ export default function Home() {
               {recommendations.map((item) => (
                 <article className="recommendation-card" key={item.id}>
                   <div className="recommendation-person">
-                    <div className="recommendation-avatar" aria-hidden="true">{item.name.split(/\s+/).map((part) => part[0]).slice(0, 2).join("")}</div>
+                    <div className="recommendation-avatar" aria-hidden="true">{item.image ? <img src={assetPath(item.image)} alt="" /> : item.name.split(/\s+/).map((part) => part[0]).slice(0, 2).join("")}</div>
                     <div>
                       <h3>{item.name}</h3>
                       <p>{item.headline}</p>

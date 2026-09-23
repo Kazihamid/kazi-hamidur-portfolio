@@ -55,6 +55,7 @@ export default function RecommendationsEditor() {
         date: new Date().toISOString().slice(0, 10),
         text: "Add the recommendation text.",
         source: "LinkedIn",
+        image: "",
       });
     });
   }
@@ -82,6 +83,7 @@ export default function RecommendationsEditor() {
             date: published || "",
             text: description,
             source: "LinkedIn",
+            image: "",
           };
         }).filter((item) => item.text);
 
@@ -133,6 +135,9 @@ export default function RecommendationsEditor() {
           </label>
           <label>Relationship
             <input value={item.relationship} onChange={(event) => update((draft) => { draft.recommendations[index].relationship = event.target.value; })}/>
+          </label>
+          <label className="recommendation-image-field">Recommender Image URL / Repository Path
+            <input value={item.image ?? ""} placeholder="/images/recommendations/name.png" onChange={(event) => update((draft) => { draft.recommendations[index].image = event.target.value; })}/>
           </label>
         </div>
         <label>Recommendation Text
