@@ -22,7 +22,7 @@ export type Recommendation = {
   image?: string;
 };
 
-export type PortfolioData = Omit<BasePortfolioData, "projects"> & {
+export type PortfolioData = Omit<BasePortfolioData, "projects" | "recommendations"> & {
   projects: PortfolioProject[];
   recommendations: Recommendation[];
 };
