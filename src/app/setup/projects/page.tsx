@@ -43,9 +43,9 @@ export default function ProjectsEditor(){
             </label>
             <label>End Date
               <input type="month" value={p.endDate??""} onChange={e=>update(d=>{d.projects[i].endDate=e.target.value})}/>
-              <small>Leave End Date blank for an ongoing project (Present).</small>
             </label>
           </div>
+          <small className="project-date-help">Use the month picker. Leave End Date blank for an ongoing project (Present).</small>
           <label>Project Description
             <textarea rows={7} value={p.description} onChange={e=>update(d=>{d.projects[i].description=e.target.value})}/>
           </label>

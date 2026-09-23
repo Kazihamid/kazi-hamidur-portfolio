@@ -138,7 +138,7 @@
       ]
     },
     {
-      "role": "SQA Specialist",
+      "role": "QA Specialist",
       "company": "20-20 Technologies Bangladesh Ltd.",
       "start": "March 2011",
       "end": "June 2013",
@@ -177,17 +177,15 @@
   "projects": [
     {
       "id": "project-1789909763990",
-      "title": "20-20 Commercial Software",
+      "title": "20-20 Commercial Software ",
       "category": "Commercial Design & Manufacturing Software",
-      "description": "A commercial software - 2D/3D CAD, Space Planning & Visualization suite included:\n\n▶️ 20-20 Worksheet – product/order and specification workflow.\n▶️ 20-20 Giza Designer – space planning and design.\n▶️ 20-20 CAP Designer – cabinet design and manufacturing-related design.\n▶️ 20-20 Visual Impression – 3D visualization and presentation.\n\nI was responsible for overall product quality assurance and QA leadership across the project lifecycle. I defined QA scope, objectives, test strategy, resource requirements, and quality deliverables in collaboration with senior management and stakeholders. I led functional, integration, regression, security, usability, compatibility, ad-hoc, automation, and performance testing activities.",
+      "description": "A commercial software - 2D/3D CAD, Space Planning & Visualization suite included:\n\n▶️ 20-20 Worksheet – product/order and specification workflow.\n▶️ 20-20 Giza Designer – space planning and design.\n▶️ 20-20 CAP Designer – cabinet design and manufacturing-related design.\n▶️ 20-20 Visual Impression – 3D visualization and presentation.\n\nI was responsible for overall product quality assurance and QA leadership across the project lifecycle. I defined QA scope, objectives, test strategy, resource requirements, and quality deliverables in collaboration with senior management and stakeholders. I led functional, integration, regression, security, usability, compatibility, ad-hoc, automation, and performance testing activities. ",
       "tools": [
         "AutoCAD"
       ],
       "featured": true,
       "startDate": "2011-03",
-      "endDate": "2014-09"
-      "tools": [],
-      "featured": true
+      "endDate": "2014-09",
     },
     {
       "id": "erp-hrms",
@@ -431,8 +429,7 @@
       "relationship": "Pierre worked with Kazi Hamidur on the same team",
       "date": "2017-03-04",
       "text": "Hamid was a valued member of our QA team and I recommend him highly to anybody organization.",
-      "source": "LinkedIn",
-      "image": "/images/recommendations/pierre-corriveau.png"
+      "source": "LinkedIn"
     },
     {
       "id": "don-van-duren-2014",
@@ -441,8 +438,7 @@
       "relationship": "Don managed Kazi Hamidur directly",
       "date": "2014-04-29",
       "text": "Hamidur is and has been an important associate in our organization as we have and continue to grow our globally integrated software QA systems and performance.",
-      "source": "LinkedIn",
-      "image": "/images/recommendations/don-van-duren.png"
+      "source": "LinkedIn"
     }
   ]
 }

@@ -19,6 +19,7 @@ export type Recommendation = {
   date: string;
   text: string;
   source?: string;
+  image?: string;
 };
 
 export type PortfolioData = Omit<BasePortfolioData, "projects"> & {
@@ -52,6 +53,7 @@ const SEEDED_RECOMMENDATIONS: Recommendation[] = [
     date: "2017-03-04",
     text: "Hamid was a valued member of our QA team and I recommend him highly to anybody organization.",
     source: "LinkedIn",
+    image: "/images/recommendations/pierre-corriveau.png",
   },
   {
     id: "don-van-duren-2014",
@@ -61,6 +63,7 @@ const SEEDED_RECOMMENDATIONS: Recommendation[] = [
     date: "2014-04-29",
     text: "Hamidur is and has been an important associate in our organization as we have and continue to grow our globally integrated software QA systems and performance.",
     source: "LinkedIn",
+    image: "/images/recommendations/don-van-duren.png",
   },
 ];
 
@@ -136,6 +139,18 @@ function normalizePortfolio(input: BasePortfolioData | PortfolioData): Portfolio
   if (!Array.isArray(parsed.recommendations)) {
     parsed.recommendations = structuredClone(SEEDED_RECOMMENDATIONS);
   }
+
+  // Enrich the original LinkedIn recommendations with the supplied profile
+  // images even when an older saved draft/repository JSON does not yet
+  // contain the new image field.
+  parsed.recommendations.forEach((item) => {
+    if (!item.image && item.name === "Pierre Corriveau") {
+      item.image = "/images/recommendations/pierre-corriveau.png";
+    }
+    if (!item.image && item.name === "Don Van Duren") {
+      item.image = "/images/recommendations/don-van-duren.png";
+    }
+  });
 
   if (!parsed.navigation.some((item) => item.href === "/recommendations")) {
     const recommendationNav = {
