@@ -879,3 +879,80 @@
   .project-date-grid{grid-template-columns:1fr}
   .project-date-grid label{grid-template-rows:auto 52px}
 }
+
+/* v3.0.6 — Cross-browser project date selectors + polished recommendation avatars */
+.project-date-field{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  gap:12px;
+  width:100%;
+}
+.project-date-field select{
+  width:100%;
+  min-height:52px;
+  height:52px;
+  margin:0;
+  border-radius:10px;
+  border:1px solid #204766;
+  background:#03182b;
+  color:#f4f8fc;
+  padding:0 14px;
+  appearance:none;
+  -webkit-appearance:none;
+  -moz-appearance:none;
+  background-image:linear-gradient(45deg,transparent 50%, #8eb5d4 50%),linear-gradient(135deg,#8eb5d4 50%, transparent 50%);
+  background-position:calc(100% - 18px) calc(50% - 3px), calc(100% - 12px) calc(50% - 3px);
+  background-size:6px 6px, 6px 6px;
+  background-repeat:no-repeat;
+}
+.project-date-field select:focus{
+  outline:none;
+  border-color:#2d8ef0;
+  box-shadow:0 0 0 3px rgba(45,142,240,.16);
+}
+.project-date-field select option{
+  color:#061626;
+}
+
+.recommendation-person{
+  grid-template-columns:72px minmax(0,1fr) auto;
+  gap:16px;
+  align-items:center;
+}
+.recommendation-avatar{
+  width:72px;
+  height:72px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  overflow:hidden;
+  padding:0;
+  background:radial-gradient(circle at 30% 30%, rgba(28,157,255,.28), rgba(8,28,46,.96));
+  border:1px solid rgba(95,177,255,.38);
+  box-shadow:0 8px 24px rgba(0,0,0,.18), inset 0 0 0 1px rgba(255,255,255,.05);
+}
+.recommendation-avatar img{
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  object-position:center center;
+  border-radius:50%;
+  image-rendering:auto;
+  filter:contrast(1.02) saturate(1.02);
+}
+.recommendation-card-full .recommendation-text{
+  margin-top:20px !important;
+}
+@media(max-width:600px){
+  .project-date-field{grid-template-columns:1fr;}
+  .recommendation-person{
+    grid-template-columns:60px minmax(0,1fr);
+    gap:12px;
+  }
+  .recommendation-avatar{
+    width:60px;
+    height:60px;
+  }
+}
+
