@@ -13,6 +13,7 @@ const items: Array<[string,string,IconName]> = [
   ["Projects","/setup/projects","project"],
   ["Leadership","/setup/leadership","leadership"],
   ["Certifications","/setup/certifications","certificate"],
+  ["Recommendations","/setup/recommendations","quote"],
   ["Navigation","/setup/navigation","navigation"],
   ["Import / Export","/setup/export","import"],
 ];

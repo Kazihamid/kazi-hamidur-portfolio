@@ -4,8 +4,10 @@ import Link from "next/link";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { ProfessionalIcon, type IconName } from "@/components/ProfessionalIcon";
+import { CvDownloadMenu } from "@/components/CvDownloadMenu";
 import { usePortfolio } from "@/context/PortfolioContext";
 import { assetPath } from "@/lib/paths";
+import { formatProjectPeriod, sortProjectsRecentFirst } from "@/lib/projectDates";
 
 function highlightIcon(title: string): IconName {
   const key = title.toLowerCase();
@@ -24,10 +26,8 @@ function projectIcon(category: string, title: string): IconName {
   return "project";
 }
 
-
 function ProjectDescription({ text }: { text: string }) {
   const lines = text.replace(/\r\n/g, "\n").split("\n");
-
   return (
     <div className="project-description" aria-label="Project description">
       {lines.map((line, index) => (
@@ -39,28 +39,18 @@ function ProjectDescription({ text }: { text: string }) {
   );
 }
 
-function projectAddedAt(id: string) {
-  const match = /^project-(\d+)$/.exec(id);
-  return match ? Number(match[1]) : null;
+function recommendationDate(value: string) {
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return value;
+  return new Intl.DateTimeFormat("en-US", { month: "short", year: "numeric" }).format(date);
 }
 
 export default function Home() {
   const { data } = usePortfolio();
-
-  // Projects created from Setup use project-<timestamp> IDs. Keep the most
-  // recently added projects first, while preserving repository order for
-  // legacy projects that do not have a timestamp-based ID.
-  const featured = data.projects
-    .map((project, index) => ({ project, index, addedAt: projectAddedAt(project.id) }))
-    .filter(({ project }) => project.featured)
-    .sort((a, b) => {
-      if (a.addedAt !== null && b.addedAt !== null) return b.addedAt - a.addedAt;
-      if (a.addedAt !== null) return -1;
-      if (b.addedAt !== null) return 1;
-      return a.index - b.index;
-    })
-    .slice(0, 3)
-    .map(({ project }) => project);
+  const featured = sortProjectsRecentFirst(data.projects.filter((project) => project.featured)).slice(0, 3);
+  const recommendations = [...data.recommendations]
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+    .slice(0, 2);
 
   return (
     <>
@@ -78,10 +68,7 @@ export default function Home() {
                   <ProfessionalIcon name="career" className="button-icon" />
                   View My Journey
                 </Link>
-                <a className="button secondary" href={assetPath(data.profile.cv)} download>
-                  <ProfessionalIcon name="download" className="button-icon" />
-                  Download CV
-                </a>
+                <CvDownloadMenu secondary />
               </div>
 
               <div className="social-row">
@@ -120,21 +107,52 @@ export default function Home() {
           </div>
 
           <div className="project-grid">
-            {featured.map((p) => (
-              <article className="bento-card project-card icon-card" key={p.id}>
-                <div className="card-icon-row">
-                  <ProfessionalIcon name={projectIcon(p.category, p.title)} className="icon-badge" />
-                  <span className="pill">{p.category}</span>
-                </div>
-                <h3>{p.title}</h3>
-                <ProjectDescription text={p.description} />
-                <div className="tags">
-                  {p.tools.map((t) => <span key={t}>{t}</span>)}
-                </div>
-              </article>
-            ))}
+            {featured.map((p) => {
+              const period = formatProjectPeriod(p);
+              return (
+                <article className={`bento-card project-card icon-card ${period ? "has-project-period" : ""}`} key={p.id}>
+                  <div className="card-icon-row">
+                    <ProfessionalIcon name={projectIcon(p.category, p.title)} className="icon-badge" />
+                    <span className="pill">{p.category}</span>
+                  </div>
+                  <h3>{p.title}</h3>
+                  <ProjectDescription text={p.description} />
+                  <div className="tags">
+                    {p.tools.map((t) => <span key={t}>{t}</span>)}
+                  </div>
+                  {period && <span className="project-period">{period}</span>}
+                </article>
+              );
+            })}
           </div>
         </section>
+
+        {recommendations.length > 0 && (
+          <section className="shell bento-section home-recommendations">
+            <div className="section-heading">
+              <div>
+                <h3 className="eyebrow">RECOMMENDATIONS</h3>
+                <h2>What colleagues have said</h2>
+              </div>
+              <Link href="/recommendations">View all recommendations →</Link>
+            </div>
+            <div className="recommendations-grid home-recommendations-grid">
+              {recommendations.map((item) => (
+                <article className="recommendation-card" key={item.id}>
+                  <div className="recommendation-person">
+                    <div className="recommendation-avatar" aria-hidden="true">{item.name.split(/\s+/).map((part) => part[0]).slice(0, 2).join("")}</div>
+                    <div>
+                      <h3>{item.name}</h3>
+                      <p>{item.headline}</p>
+                      <small>{recommendationDate(item.date)} · {item.relationship}</small>
+                    </div>
+                  </div>
+                  <p className="recommendation-text">“{item.text}”</p>
+                </article>
+              ))}
+            </div>
+          </section>
+        )}
 
         <section className="shell split-section">
           <article className="bento-card large icon-card">
@@ -165,7 +183,7 @@ export default function Home() {
               <p>Open to professional conversations about QA leadership, software quality, automation and enterprise delivery.</p>
             </div>
           </div>
-          <Link className="button" href="/contact"><ProfessionalIcon name="send" className="button-icon" />Get in Touch</Link>
+          <Link className="button" href="/contact">Get in Touch</Link>
         </section>
       </main>
       <SiteFooter />
