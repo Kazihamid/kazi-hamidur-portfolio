@@ -748,3 +748,72 @@
 @media print{
   .resume-back-button{display:none!important}
 }
+
+/* v2.9 — CV format chooser, project duration, recommendations */
+.cv-download-menu{position:relative;display:inline-block}
+.cv-download-menu>summary{list-style:none;user-select:none}
+.cv-download-menu>summary::-webkit-details-marker{display:none}
+.cv-download-menu>summary.button{cursor:pointer}
+.cv-chevron{font-size:10px;margin-left:7px;opacity:.8}
+.cv-download-options{position:absolute;right:0;top:calc(100% + 9px);z-index:80;width:270px;padding:7px;background:#071a2d;border:1px solid #245477;border-radius:12px;box-shadow:0 18px 46px rgba(0,0,0,.35)}
+.actions .cv-download-options{left:0;right:auto}
+.cv-download-options a{display:flex;align-items:center;gap:10px;padding:10px;border-radius:9px;color:#d9e9f5}
+.cv-download-options a:hover{background:#0b2b47}
+.cv-download-options a>span:last-child{display:grid;gap:1px}
+.cv-download-options strong{font-size:12.5px;color:#fff}
+.cv-download-options small{font-size:10.5px;color:#8faabe}
+.cv-format-badge{display:inline-grid;place-items:center;min-width:46px;height:30px;padding:0 7px;border-radius:7px;background:rgba(255,85,85,.13);border:1px solid rgba(255,107,120,.35);color:#ff9da7;font-size:10px;font-weight:800}
+.cv-format-badge.word{background:rgba(72,143,255,.13);border-color:rgba(95,177,255,.35);color:#8acbff}
+
+.project-card{position:relative}
+.project-card.has-project-period{padding-bottom:56px}
+.project-card.has-project-period .tags{padding-bottom:8px}
+.project-period{position:absolute;right:18px;bottom:16px;color:var(--cyan);font-size:11px;font-weight:650;white-space:nowrap}
+.project-date-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0}
+.project-date-grid small{font-weight:500;color:#7a8f9f;line-height:1.35}
+.project-editor-main{display:grid;gap:12px}
+
+.recommendations-page-section{padding-bottom:64px}
+.recommendations-toolbar{display:flex;align-items:center;justify-content:space-between;gap:18px;margin:4px 0 20px;color:var(--muted)}
+.recommendations-grid,.recommendations-list{display:grid;gap:14px}
+.recommendations-grid{grid-template-columns:repeat(2,1fr)}
+.recommendation-card{background:linear-gradient(160deg,rgba(11,34,56,.94),rgba(5,22,37,.96));border:1px solid var(--line);border-radius:16px;padding:20px;box-shadow:var(--shadow)}
+.recommendation-card-full{padding:24px}
+.recommendation-person{display:grid;grid-template-columns:48px 1fr auto;gap:12px;align-items:start}
+.recommendation-avatar{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(145deg,#147fe8,#0d4f8b);border:1px solid #3a91d1;color:#fff;font-weight:800;font-size:13px}
+.recommendation-person h2,.recommendation-person h3{margin:0 0 2px;font-size:18px}
+.recommendation-person p{margin:0;color:#b8cada;font-size:13px}
+.recommendation-person small{display:block;margin-top:3px;color:#718da3;font-size:11px}
+.recommendation-quote-icon{width:26px;height:26px;color:#5fb1ff}
+.recommendation-text{margin:18px 0 0!important;color:#d0dfeb!important;font-size:15px;line-height:1.72;white-space:pre-wrap}
+.recommendation-source{display:inline-block;margin-top:14px;color:#6e91aa;font-size:11px}
+.home-recommendations{padding-top:40px}
+.home-recommendations-grid .recommendation-text{font-size:14px}
+
+.linkedin-sync-card{display:flex;justify-content:space-between;align-items:center;gap:22px;margin-bottom:16px}
+.linkedin-sync-card>div:first-child{max-width:720px}
+.recommendations-admin-list{display:grid;gap:14px}
+.recommendation-editor{display:grid;gap:14px}
+.recommendation-editor-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.recommendation-editor-footer{display:flex;justify-content:space-between;align-items:center;gap:12px}
+
+@media(min-width:901px){
+  .nav{gap:14px}
+  .nav a{font-size:12px}
+}
+@media(max-width:900px){
+  .cv-download-menu.desktop-only{display:none}
+  .recommendations-grid{grid-template-columns:1fr}
+  .linkedin-sync-card{align-items:flex-start;flex-direction:column}
+}
+@media(max-width:600px){
+  .cv-download-menu{width:100%}
+  .cv-download-menu>summary.button{width:100%}
+  .cv-download-options{left:0;right:auto;width:min(290px,calc(100vw - 36px))}
+  .project-date-grid,.recommendation-editor-grid{grid-template-columns:1fr}
+  .project-period{position:static;display:block;margin-top:18px;text-align:right}
+  .project-card.has-project-period{padding-bottom:18px}
+  .recommendations-toolbar{align-items:flex-start;flex-direction:column}
+  .recommendation-person{grid-template-columns:44px 1fr}
+  .recommendation-quote-icon{display:none}
+}

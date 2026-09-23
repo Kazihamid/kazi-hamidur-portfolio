@@ -2,17 +2,26 @@
 import { usePortfolio } from "@/context/PortfolioContext";
 import { assetPath } from "@/lib/paths";
 import Link from "next/link";
+import { sortProjectsRecentFirst } from "@/lib/projectDates";
+
+function latestYear(value:string){
+  const years=value.match(/\d{4}/g)?.map(Number) ?? [];
+  return years.length ? Math.max(...years) : 0;
+}
 
 export default function Resume() {
   const { data } = usePortfolio();
+  const certifications=[...data.certifications].sort((a,b)=>latestYear(b.year)-latestYear(a.year));
+  const projects=sortProjectsRecentFirst(data.projects);
+
   return <main className="resume-page">
     <div className="resume-actions"><button className="button" onClick={() => window.print()}>Print / Save as PDF</button><Link className="resume-back-button" href="/setup/export">← Back to Import / Export</Link></div>
     <header className="resume-head"><div><h1>{data.profile.name}</h1><h2>{data.profile.title}</h2><p>{data.profile.email} · {data.profile.location}</p><p>{data.profile.linkedin} · {data.profile.github}</p></div><img src={assetPath(data.profile.image)} alt={data.profile.name} /></header>
     <section><h2>Professional Summary</h2><p>{data.profile.heroDescription}</p></section>
     <section><h2>Core Competencies</h2><div className="resume-tags">{data.skills.flatMap((s) => s.items).map((x) => <span key={x}>{x}</span>)}</div></section>
     <section><h2>Professional Experience</h2>{data.experience.map((e) => <article className="resume-entry" key={e.role}><div><strong>{e.role}</strong><span>{e.start} — {e.end}</span></div><b>{e.company}</b><p>{e.summary}</p></article>)}</section>
-    <section><h2>Selected Project / Domain Experience</h2>{data.projects.map((p) => <article className="resume-entry" key={p.id}><strong>{p.title}</strong><p>{p.description}</p></article>)}</section>
-    <section><h2>Certifications & Professional Development</h2>{data.certifications.map((c) => <div className="resume-line" key={c.name}><strong>{c.name}</strong><span>{c.issuer} · {c.year}</span></div>)}</section>
-    <section><h2>Education</h2>{data.education.map((e) => <div className="resume-line" key={e.degree}><strong>{e.degree}</strong><span>{e.school} · {e.year}</span></div>)}</section>
+    <section><h2>Selected Project / Domain Experience</h2>{projects.map((p) => <article className="resume-entry" key={p.id}><strong>{p.title}</strong><p>{p.description}</p></article>)}</section>
+    <section><h2>Certifications & Professional Development</h2>{certifications.map((c) => <div className="resume-line" key={c.name}><strong>{c.name}</strong><span>{c.issuer} · {c.year}</span></div>)}</section>
+    <section><h2>Education</h2>{[...data.education].sort((a,b)=>Number(b.year)-Number(a.year)).map((e) => <div className="resume-line" key={e.degree}><strong>{e.degree}</strong><span>{e.school} · {e.year}</span></div>)}</section>
   </main>;
 }

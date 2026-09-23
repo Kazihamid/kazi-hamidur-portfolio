@@ -4,7 +4,28 @@ import React, { createContext, useContext, useEffect, useMemo, useState } from "
 import { usePathname } from "next/navigation";
 import defaults from "@/data/portfolio.json";
 
-export type PortfolioData = typeof defaults;
+type BasePortfolioData = typeof defaults;
+
+type PortfolioProject = BasePortfolioData["projects"][number] & {
+  startDate?: string;
+  endDate?: string;
+};
+
+export type Recommendation = {
+  id: string;
+  name: string;
+  headline: string;
+  relationship: string;
+  date: string;
+  text: string;
+  source?: string;
+};
+
+export type PortfolioData = Omit<BasePortfolioData, "projects"> & {
+  projects: PortfolioProject[];
+  recommendations: Recommendation[];
+};
+
 type ContextType = {
   data: PortfolioData;
   hydrated: boolean;
@@ -22,14 +43,36 @@ const STORAGE_KEY = "khr-portfolio-draft-v1";
 const SAVED_AT_KEY = "khr-portfolio-draft-v1-saved-at";
 const PortfolioContext = createContext<ContextType | null>(null);
 
-function migrateDraft(parsed: PortfolioData) {
+const SEEDED_RECOMMENDATIONS: Recommendation[] = [
+  {
+    id: "pierre-corriveau-2017",
+    name: "Pierre Corriveau",
+    headline: "Senior Director at 2020",
+    relationship: "Pierre worked with Kazi Hamidur on the same team",
+    date: "2017-03-04",
+    text: "Hamid was a valued member of our QA team and I recommend him highly to anybody organization.",
+    source: "LinkedIn",
+  },
+  {
+    id: "don-van-duren-2014",
+    name: "Don Van Duren",
+    headline: "Software Quality Assurance Manager - Retired :-)",
+    relationship: "Don managed Kazi Hamidur directly",
+    date: "2014-04-29",
+    text: "Hamidur is and has been an important associate in our organization as we have and continue to grow our globally integrated software QA systems and performance.",
+    source: "LinkedIn",
+  },
+];
+
+function normalizePortfolio(input: BasePortfolioData | PortfolioData): PortfolioData {
+  const parsed = structuredClone(input) as PortfolioData;
+
   // Preserve existing drafts, but migrate the original GitHub avatar to
   // the local professional portrait shipped with the portfolio.
   if (parsed.profile?.image === "https://github.com/Kazihamid.png?size=480") {
     parsed.profile.image = defaults.profile.image;
   }
 
-  // Migrate content labels changed in the current portfolio design.
   parsed.highlights?.forEach((item) => {
     if (item.label === "AUTO") item.label = "TEST";
 
@@ -53,10 +96,7 @@ function migrateDraft(parsed: PortfolioData) {
           return "Playwright-Python";
         }
 
-        if (item === "Selenium + Java") {
-          return "Selenium-Java";
-        }
-
+        if (item === "Selenium + Java") return "Selenium-Java";
         return item;
       });
     }
@@ -69,7 +109,13 @@ function migrateDraft(parsed: PortfolioData) {
     technicalLead.focus.push("AI-Driven Quality Engineering");
   }
 
-  parsed.projects?.forEach((project) => {
+  parsed.projects = (parsed.projects ?? []).map((project) => ({
+    ...project,
+    startDate: project.startDate ?? "",
+    endDate: project.endDate ?? "",
+  }));
+
+  parsed.projects.forEach((project) => {
     if (project.id === "erp-hrms") {
       project.tools = project.tools.map((tool) =>
         tool === "ERP/HRMS" ? "AI-Driven Quality Engineering" : tool
@@ -87,25 +133,42 @@ function migrateDraft(parsed: PortfolioData) {
     }
   });
 
+  if (!Array.isArray(parsed.recommendations)) {
+    parsed.recommendations = structuredClone(SEEDED_RECOMMENDATIONS);
+  }
+
+  if (!parsed.navigation.some((item) => item.href === "/recommendations")) {
+    const recommendationNav = {
+      label: "Recommendations",
+      href: "/recommendations",
+      visible: true,
+    };
+    const contactIndex = parsed.navigation.findIndex((item) => item.href === "/contact");
+    if (contactIndex >= 0) parsed.navigation.splice(contactIndex, 0, recommendationNav);
+    else parsed.navigation.push(recommendationNav);
+  }
+
   return parsed;
 }
+
+const normalizedDefaults = normalizePortfolio(defaults);
 
 export function PortfolioProvider({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const isSetupRoute = /(^|\/)setup(\/|$)/.test(pathname);
-  const [data, setData] = useState<PortfolioData>(defaults);
+  const [data, setData] = useState<PortfolioData>(normalizedDefaults);
   const [hydrated, setHydrated] = useState(false);
-  const [savedSnapshot, setSavedSnapshot] = useState(() => JSON.stringify(defaults));
+  const [savedSnapshot, setSavedSnapshot] = useState(() => JSON.stringify(normalizedDefaults));
   const [hasSavedDraft, setHasSavedDraft] = useState(false);
   const [lastSavedAt, setLastSavedAt] = useState<string | null>(null);
 
   useEffect(() => {
-    // Public pages must always render the deployed repository data. Browser
-    // drafts belong only to /setup so an old localStorage draft can never
-    // override a newer GitHub Pages deployment for visitors.
+    // Public pages always render deployed repository data. Browser drafts belong
+    // only to /setup so visitors never see stale localStorage content.
     if (!isSetupRoute) {
-      setData(defaults);
-      setSavedSnapshot(JSON.stringify(defaults));
+      const deployed = normalizePortfolio(defaults);
+      setData(deployed);
+      setSavedSnapshot(JSON.stringify(deployed));
       setHasSavedDraft(false);
       setLastSavedAt(null);
       setHydrated(true);
@@ -117,21 +180,22 @@ export function PortfolioProvider({ children }: { children: React.ReactNode }) {
       const savedAt = localStorage.getItem(SAVED_AT_KEY);
 
       if (stored) {
-        const parsed = migrateDraft(JSON.parse(stored) as PortfolioData);
+        const parsed = normalizePortfolio(JSON.parse(stored) as PortfolioData);
         setData(parsed);
         setSavedSnapshot(JSON.stringify(parsed));
         setHasSavedDraft(true);
         setLastSavedAt(savedAt);
       } else {
-        setData(defaults);
-        setSavedSnapshot(JSON.stringify(defaults));
+        const deployed = normalizePortfolio(defaults);
+        setData(deployed);
+        setSavedSnapshot(JSON.stringify(deployed));
         setHasSavedDraft(false);
         setLastSavedAt(null);
       }
     } catch {
-      // Keep repository defaults if a browser draft is invalid.
-      setData(defaults);
-      setSavedSnapshot(JSON.stringify(defaults));
+      const deployed = normalizePortfolio(defaults);
+      setData(deployed);
+      setSavedSnapshot(JSON.stringify(deployed));
       setHasSavedDraft(false);
       setLastSavedAt(null);
     } finally {
@@ -165,7 +229,7 @@ export function PortfolioProvider({ children }: { children: React.ReactNode }) {
       recipe(copy);
       return copy;
     }),
-    replace: (nextData) => setData(migrateDraft(structuredClone(nextData))),
+    replace: (nextData) => setData(normalizePortfolio(structuredClone(nextData))),
     saveDraft: () => {
       const serialized = JSON.stringify(data);
       const savedAt = new Date().toISOString();
@@ -177,14 +241,15 @@ export function PortfolioProvider({ children }: { children: React.ReactNode }) {
     },
     discardChanges: () => {
       try {
-        setData(JSON.parse(savedSnapshot) as PortfolioData);
+        setData(normalizePortfolio(JSON.parse(savedSnapshot) as PortfolioData));
       } catch {
-        setData(defaults);
+        setData(normalizePortfolio(defaults));
       }
     },
     reset: () => {
-      setData(defaults);
-      setSavedSnapshot(JSON.stringify(defaults));
+      const deployed = normalizePortfolio(defaults);
+      setData(deployed);
+      setSavedSnapshot(JSON.stringify(deployed));
       setHasSavedDraft(false);
       setLastSavedAt(null);
       localStorage.removeItem(STORAGE_KEY);
