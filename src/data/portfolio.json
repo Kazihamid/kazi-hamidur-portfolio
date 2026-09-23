@@ -176,22 +176,28 @@
   ],
   "projects": [
     {
+      "id": "project-1790172993542",
+      "title": "sbiCloud BRAC Int. ERP",
+      "category": "Enterprise Systems",
+      "description": "Quality assurance for enterprise HR and business processes, including functional, integration, regression and release validation.",
+      "tools": [],
+      "featured": true,
+      "startDate": "2015-01",
+      "endDate": ""
+    },
+    {
       "id": "project-1789909763990",
       "title": "20-20 Commercial Software ",
       "category": "Commercial Design & Manufacturing Software",
       "description": "A commercial software - 2D/3D CAD, Space Planning & Visualization suite included:\n\n▶️ 20-20 Worksheet – product/order and specification workflow.\n▶️ 20-20 Giza Designer – space planning and design.\n▶️ 20-20 CAP Designer – cabinet design and manufacturing-related design.\n▶️ 20-20 Visual Impression – 3D visualization and presentation.\n\nI was responsible for overall product quality assurance and QA leadership across the project lifecycle. I defined QA scope, objectives, test strategy, resource requirements, and quality deliverables in collaboration with senior management and stakeholders. I led functional, integration, regression, security, usability, compatibility, ad-hoc, automation, and performance testing activities. ",
-      "tools": [
-        "AutoCAD"
-      ],
+      "tools": [],
       "featured": true,
       "startDate": "2011-03",
-      "endDate": "2014-09",
-      "tools": [],
-      "featured": true
+      "endDate": "2014-09"
     },
     {
       "id": "erp-hrms",
-      "title": "ERP / HRMS Quality Assurance",
+      "title": "sbiCloud BRAC BD ERP",
       "category": "Enterprise Systems",
       "description": "Quality assurance for enterprise HR and business processes, including functional, integration, regression and release validation.",
       "tools": [
@@ -200,12 +206,12 @@
         "Regression"
       ],
       "featured": true,
-      "startDate": "2016-01",
+      "startDate": "2016-09",
       "endDate": ""
     },
     {
       "id": "erecruitment",
-      "title": "E-Recruitment Quality Assurance",
+      "title": "sbiCloud E-Recruitment",
       "category": "Enterprise Systems",
       "description": "Testing recruitment and hiring workflows across web-based enterprise recruitment functionality.",
       "tools": [
@@ -214,7 +220,7 @@
         "Integration Testing"
       ],
       "featured": true,
-      "startDate": "",
+      "startDate": "2020-11",
       "endDate": ""
     },
     {
