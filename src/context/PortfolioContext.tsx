@@ -144,11 +144,6 @@ function normalizePortfolio(input: BasePortfolioData | PortfolioData): Portfolio
         tool === "UAT" ? "Integration Testing" : tool
       );
     }
-    if (project.id === "automation") {
-      project.description =
-        "UI automation and regression coverage using Playwright-Python and Selenium-Java approaches.";
-      project.tools = ["Playwright", "Python", "Selenium", "Java"];
-    }
   });
 
   if (!Array.isArray(parsed.recommendations)) {
