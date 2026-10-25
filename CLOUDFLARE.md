@@ -37,6 +37,8 @@ Disable builds for non-production branches unless you create a separate preview 
 
 After connecting, start one build from `main` and confirm it succeeds. Thereafter, pushing to `main` or merging a pull request into `main` triggers deployment automatically. Setup's Save & Publish continues to update D1 directly, and code deployments preserve that content.
 
+To check a build, open the Worker's **Deployments** tab and select the latest build to view its status and logs. The banner asking for your first commit means the connection is ready but no build has started yet. A successful production deployment confirms the new code is live.
+
 ## Manual installation alternative
 
 Use the Cloudflare Free plan. This project does not enable paid features. Free quotas still apply; Cloudflare may reject requests when quotas are exhausted.
