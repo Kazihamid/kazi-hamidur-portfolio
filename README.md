@@ -2,6 +2,8 @@
 
 A dark Modern Bento personal portfolio and lightweight browser-based portfolio CMS.
 
+Cloudflare mode supports authenticated **Save & Publish** directly from Setup, using a Worker and D1 database. See [CLOUDFLARE.md](CLOUDFLARE.md) for deployment and daily editing. The GitHub Pages mode below remains available.
+
 ## Stack
 - Next.js 16 / React 19 / TypeScript
 - Static export for GitHub Pages

@@ -44,7 +44,7 @@ async function copyText(text: string) {
 }
 
 export default function ExportCenter() {
-  const { data, replace, reset } = usePortfolio();
+  const { data, replace, reset, cloud, publish, publishing } = usePortfolio();
   const ref = useRef<HTMLInputElement>(null);
   const [message, setMessage] = useState("");
   const [writing, setWriting] = useState(false);
@@ -167,9 +167,9 @@ export default function ExportCenter() {
         </article>
 
         <article className="admin-card">
-          <h2>{isLocalWorkspace ? "Update Local Codebase" : "Publish Data to GitHub"}</h2>
+          <h2>{cloud ? "Publish to Live Portfolio" : isLocalWorkspace ? "Update Local Codebase" : "Publish Data to GitHub"}</h2>
 
-          {isLocalWorkspace ? (
+          {cloud ? <><p>Publish the current editor content. Visitors will see your changes without Git commands or a new deployment.</p><button className="button" disabled={publishing} onClick={() => void publish()}>{publishing ? "Publishing…" : "Save & Publish"}</button><p className="muted">Export JSON anytime to keep a portable backup.</p></> : isLocalWorkspace ? (
             <>
               <p>
                 Save the current Setup data directly into the local repository file
@@ -233,14 +233,14 @@ export default function ExportCenter() {
 
         <article className="admin-card">
           <h2>Reset Draft</h2>
-          <p>Restore the repository defaults and remove browser-only edits.</p>
+          <p>{cloud ? "Remove local edits and reload the latest published content." : "Restore the repository defaults and remove browser-only edits."}</p>
           <button
             className="danger"
             onClick={() => {
               if (confirm("Reset local portfolio draft?")) reset();
             }}
           >
-            Reset to Defaults
+            {cloud ? "Reload Live Content" : "Reset to Defaults"}
           </button>
         </article>
       </section>

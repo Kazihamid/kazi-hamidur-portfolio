@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useState } from "react";
 import { ProfessionalIcon, type IconName } from "@/components/ProfessionalIcon";
 import { usePortfolio } from "@/context/PortfolioContext";
 
@@ -38,7 +39,27 @@ export function SetupShell({ children }: {children: React.ReactNode}) {
     saveDraft,
     discardChanges,
     reset,
+    cloud, authenticated, publishing, status, login, logout, publish, reloadLive,
   } = usePortfolio();
+  const [password, setPassword] = useState("");
+  const [loginError, setLoginError] = useState("");
+  const [signingIn, setSigningIn] = useState(false);
+
+  if (cloud && !authenticated) return <main className="admin-login">
+    <form className="admin-card form" onSubmit={async event => {
+      event.preventDefault(); setSigningIn(true); setLoginError("");
+      try { await login(password); setPassword(""); }
+      catch (error) { setLoginError(error instanceof Error ? error.message : "Sign-in failed."); }
+      finally { setSigningIn(false); }
+    }}>
+      <div className="admin-login-heading"><h1>Portfolio admin</h1><p>Sign in to edit and publish your live portfolio.</p></div>
+      <div className="admin-login-fields"><label htmlFor="admin-password">Admin password</label>
+      <input id="admin-password" type="password" autoComplete="current-password" required value={password} onChange={event => setPassword(event.target.value)} />
+      <button className="button" disabled={signingIn || !hydrated}>{signingIn ? "Signing in…" : "Sign in"}</button>
+      {(loginError || status) && <p className="admin-login-alert" role="alert">{loginError || status}</p>}</div>
+      <div className="admin-login-footer"><Link href="/">← View portfolio</Link></div>
+    </form>
+  </main>;
 
   const savedTime = formatSavedTime(lastSavedAt);
   const statusClass = !hydrated ? "loading" : dirty ? "dirty" : "saved";
@@ -48,16 +69,17 @@ export function SetupShell({ children }: {children: React.ReactNode}) {
       ? "Unsaved changes"
       : hasSavedDraft
         ? "Draft saved locally"
+        : cloud ? "Live content loaded"
         : "Repository defaults loaded";
   const statusText = !hydrated
     ? "Checking this browser for a saved draft."
     : dirty
-      ? "Your preview is updated, but these changes are not saved yet."
+      ? cloud ? "You have changes to publish." : "Your edits are not saved yet."
       : hasSavedDraft
         ? savedTime
           ? `Last saved at ${savedTime}. Stored only in this browser.`
           : "Stored only in this browser."
-        : "No browser draft has been saved yet.";
+        : cloud ? "Save & Publish makes your changes visible to visitors." : "No browser draft has been saved yet.";
 
   return <div className="setup-layout"><aside className="setup-sidebar">
     <div className="setup-logo">Portfolio <span>| Kazi Hamidur Rahman</span></div>
@@ -76,24 +98,24 @@ export function SetupShell({ children }: {children: React.ReactNode}) {
         <button
           type="button"
           className="button secondary compact"
-          disabled={!hydrated}
+          disabled={!hydrated || publishing}
           onClick={() => {
             if (
               confirm(
-                "Reload the deployed repository data? This will remove the browser-saved setup draft for this site."
+                "Load the latest published content? This removes local edits. Export JSON first if you want a backup."
               )
             ) {
-              reset();
+              if (cloud) void reloadLive(); else reset();
             }
           }}
           title="Clear this browser draft and load the data deployed from src/data/portfolio.json"
         >
-          Reload Deployed
+          {cloud ? "Reload Live" : "Reload Deployed"}
         </button>
         <button
           type="button"
           className="button secondary compact"
-          disabled={!hydrated || !dirty}
+          disabled={!hydrated || !dirty || publishing}
           onClick={() => {
             if (confirm("Discard all unsaved changes and return to the last saved draft?")) {
               discardChanges();
@@ -105,14 +127,19 @@ export function SetupShell({ children }: {children: React.ReactNode}) {
         <button
           type="button"
           className="button compact"
-          disabled={!hydrated || !dirty}
+          disabled={!hydrated || !dirty || publishing}
           onClick={saveDraft}
         >
           <ProfessionalIcon name="check" className="button-icon" />
           Save Draft
         </button>
+        {cloud && <>
+          <button type="button" className="button compact" disabled={!hydrated || publishing} onClick={() => void publish()}>{publishing ? "Publishing…" : "Save & Publish"}</button>
+          <button type="button" className="button secondary compact" disabled={publishing} onClick={() => { void logout().catch(error => setLoginError(String(error))); }}>Sign out</button>
+        </>}
       </div>
     </div>
+    {(status || loginError) && <p className="notice" role="status">{status || loginError}</p>}
     {children}
   </main></div>;
 }

@@ -4,7 +4,7 @@ import { ProfessionalIcon } from "@/components/ProfessionalIcon";
 import Link from "next/link";
 
 export default function SetupDashboard(){
-  const {data}=usePortfolio();
+  const {data,cloud}=usePortfolio();
   const checks=[Boolean(data.profile.name),Boolean(data.profile.email),Boolean(data.profile.cv),data.projects.every(p=>Boolean(p.description)),data.experience.length>0,Boolean(data.seo.title),Boolean(data.seo.description)];
   const score=Math.round(checks.filter(Boolean).length/checks.length*100);
   return <>
@@ -17,7 +17,7 @@ export default function SetupDashboard(){
     </section>
     <section className="admin-grid">
       <article className="admin-card"><div className="admin-title-row"><ProfessionalIcon name="check" className="admin-icon"/><h2>Health Checks</h2></div><ul className="check-list"><li><ProfessionalIcon name="check" className="check-icon"/>Profile configured</li><li><ProfessionalIcon name="check" className="check-icon"/>Contact information available</li><li><ProfessionalIcon name="check" className="check-icon"/>CV asset configured</li><li><ProfessionalIcon name="check" className="check-icon"/>Published project descriptions</li><li><ProfessionalIcon name="check" className="check-icon"/>Experience timeline available</li><li><ProfessionalIcon name="check" className="check-icon"/>SEO metadata configured</li></ul></article>
-      <article className="admin-card"><div className="admin-title-row"><ProfessionalIcon name="settings" className="admin-icon"/><h2>Publishing Model</h2></div><p>Edits update the preview immediately. Click Save Draft to store them in this browser. Export JSON and commit the configuration when you want to publish permanently.</p><p className="notice">Save Draft is browser-only. It does not change portfolio.json or publish to GitHub Pages. Future cloud mode can save these same screens directly to an authenticated API/database.</p></article>
+      <article className="admin-card"><div className="admin-title-row"><ProfessionalIcon name="settings" className="admin-icon"/><h2>Publishing</h2></div>{cloud ? <><p>Edit any section, then click Save &amp; Publish. Your live portfolio will use the saved content without a deployment.</p><p className="notice">Save Draft keeps a private browser backup. View Portfolio shows the last published version.</p></> : <><p>Save Draft stores edits in this browser. Export JSON and commit it to publish on GitHub Pages.</p><p className="notice">View Portfolio shows published content.</p></>}</article>
     </section>
   </>;
 }
