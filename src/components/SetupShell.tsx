@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { ProfessionalIcon, type IconName } from "@/components/ProfessionalIcon";
 import { usePortfolio } from "@/context/PortfolioContext";
+import { AdminLogin } from "@/components/AdminLogin";
 
 const items: Array<[string,string,IconName]> = [
   ["Dashboard","/setup","home"],
@@ -39,27 +40,11 @@ export function SetupShell({ children }: {children: React.ReactNode}) {
     saveDraft,
     discardChanges,
     reset,
-    cloud, authenticated, publishing, status, login, logout, publish, reloadLive,
+    cloud, authenticated, publishing, status, logout, publish, reloadLive,
   } = usePortfolio();
-  const [password, setPassword] = useState("");
   const [loginError, setLoginError] = useState("");
-  const [signingIn, setSigningIn] = useState(false);
 
-  if (cloud && !authenticated) return <main className="admin-login">
-    <form className="admin-card form" onSubmit={async event => {
-      event.preventDefault(); setSigningIn(true); setLoginError("");
-      try { await login(password); setPassword(""); }
-      catch (error) { setLoginError(error instanceof Error ? error.message : "Sign-in failed."); }
-      finally { setSigningIn(false); }
-    }}>
-      <div className="admin-login-heading"><h1>Portfolio admin</h1><p>Sign in to edit and publish your live portfolio.</p></div>
-      <div className="admin-login-fields"><label htmlFor="admin-password">Admin password</label>
-      <input id="admin-password" type="password" autoComplete="current-password" required value={password} onChange={event => setPassword(event.target.value)} />
-      <button className="button" disabled={signingIn || !hydrated}>{signingIn ? "Signing in…" : "Sign in"}</button>
-      {(loginError || status) && <p className="admin-login-alert" role="alert">{loginError || status}</p>}</div>
-      <div className="admin-login-footer"><Link href="/">← View portfolio</Link></div>
-    </form>
-  </main>;
+  if (cloud && !authenticated) return <AdminLogin />;
 
   const savedTime = formatSavedTime(lastSavedAt);
   const statusClass = !hydrated ? "loading" : dirty ? "dirty" : "saved";
